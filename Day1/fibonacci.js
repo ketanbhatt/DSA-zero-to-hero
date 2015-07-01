@@ -7,7 +7,11 @@ var num = process.argv[2],
 	second = 1,
 	curr;
 
-// Iterative
+/*
+Iterative
+Time Complexity: O(n)
+Space Complexity: O(1)
+ */
 if (num == 0)	
 	curr = first;
 else if (num == 1)
@@ -21,7 +25,11 @@ else if (num > 1) {
 }
 console.log("Iterative => " + curr);
 
-// Recursive 
+/*
+Recursive
+Time Complexity: O(2^n)
+Space Complexity: O(n)
+ */
 var fibo = function(x) {
 	if (x == 0)
 		return 0;
