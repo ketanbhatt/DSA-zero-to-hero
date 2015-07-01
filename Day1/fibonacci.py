@@ -57,7 +57,7 @@ class Fibonacci_Series:
         try:
             return mylist[n]
         except:
-            mylist.append(mylist[n-1] + mylist[n-2])
+            mylist.append(self.__Fibonacci_r_m_h(mylist,n-1)+self.__Fibonacci_r_m_h(mylist,n-2))
             return mylist[n]
     
     # dp
