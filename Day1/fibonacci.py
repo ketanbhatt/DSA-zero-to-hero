@@ -15,8 +15,10 @@ class Fibonacci_Series:
     def __str__(self):
         return ''.join(str(self.series[self.start:]))
 
-    # iterative way , time complexity: O(n), space complexity: O(1)
-    def Fibonacci_i(self):
+    # iterative way  
+    # time complexity: O(n) 
+    # space complexity: O(n)
+    def Fibonacci_i_s(self):
         ans = []
         f = 0 #first
         s = 1 #second
@@ -25,14 +27,26 @@ class Fibonacci_Series:
             f , s = s , f + s
         return ans
 
+    # iterative way (find nth Fibonacci element)  
+    # time complexity: O(n) 
+    # space complexity: O(1)
+    def Fibonacci_i(self):
+        f = 0 #first
+        s = 1 #second
+        for i in xrange(self.length):
+            f , s = s , f + s
+        return f
+
     # recursive way #not recommended
+    # time complexity: O(2^n)
+    # space complexity: O(n)
     def Fibonacci_r(self):
-        ans_r = []        #basic recursion, time complexity: exponential
+        ans_r = []        
         for i in xrange(0,self.length):
             ans_r.append(self.__Fibonacci_r_h(i))     
         return ans_r
 
-    # basic recursion
+    # recursion helper
     def __Fibonacci_r_h(self,n):
         if n==0:        #first
             return 0    
@@ -41,10 +55,11 @@ class Fibonacci_Series:
         else:
             return self.__Fibonacci_r_h(n-1)+self.__Fibonacci_r_h(n-2)
 
-    
-    # recursive memoized way
+    # recursive with memoization
+    # time complexity: O(n)
+    # space complexity: O(n)
     def Fibonacci_r_m(self):
-        ans_r_m = []       #recursion with memoization, time complexity: O(n), space complexity: O(n)
+        ans_r_m = []       
         mylist = []
         mylist.append(0)  #first
         mylist.append(1)  #second
@@ -52,7 +67,7 @@ class Fibonacci_Series:
             ans_r_m.append(self.__Fibonacci_r_m_h(mylist,i))
         return ans_r_m
     
-    # memoization
+    # recursion with memoization helper
     def __Fibonacci_r_m_h(self,mylist,n):
         try:
             return mylist[n]
@@ -60,9 +75,11 @@ class Fibonacci_Series:
             mylist.append(self.__Fibonacci_r_m_h(mylist,n-1)+self.__Fibonacci_r_m_h(mylist,n-2))
             return mylist[n]
     
-    # dp
+    # dynamic programming
+    # time complexity: O(n)
+    # space complexity: O(n)
     def Fibonacci_dp(self):
-        ans_dp = []       #dp, time complexity: O(n), space complexity: O(n)
+        ans_dp = []
         ans_dp.append(0)  #first
         ans_dp.append(1)  #second
         for i in xrange(2,self.length):
@@ -71,7 +88,7 @@ class Fibonacci_Series:
 
     # print result of different approaches
     def fs_print(self):
-        print self.Fibonacci_i()[self.start:]
+        print self.Fibonacci_i_s()[self.start:]
         print self.Fibonacci_r()[self.start:]
         print self.Fibonacci_r_m()[self.start:]
         print self.series[self.start:]
@@ -85,4 +102,4 @@ except:
 
 fs = Fibonacci_Series(end,start)    
 fs.fs_print()
-#print fs
+#print fs 	
