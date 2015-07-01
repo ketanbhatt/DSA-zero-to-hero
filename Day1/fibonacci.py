@@ -38,8 +38,8 @@ class Fibonacci_Series:
         return f
 
     # recursive way #not recommended
-    # time complexity: O(2^n)
-    # space complexity: O(n)
+    # time complexity: exponential (approx 2^n)
+    # space complexity: exponential
     def Fibonacci_r(self):
         ans_r = []        
         for i in xrange(0,self.length):
