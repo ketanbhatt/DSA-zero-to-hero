@@ -6,7 +6,8 @@
 
 
 ### Contributors
-Noob Javascript - [Ketan Bhatt](https://github.com/ketanbhatt)
-Python - [Arpit Gupta](https://github.com/TigerApps)
+* Noob Javascript - [Ketan Bhatt](https://github.com/ketanbhatt)
+* Python - [Arpit Gupta](https://github.com/TigerApps)
+
 
 ###### Huge thanks to [Ankan Adhikari](https://twitter.com/firehawk895)
