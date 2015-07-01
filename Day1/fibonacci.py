@@ -55,27 +55,25 @@ class Fibonacci_Series:
         else:
             return self.__Fibonacci_r_h(n-1)+self.__Fibonacci_r_h(n-2)
 
-    # recursive with memoization
+    # memoization (top-down)
     # time complexity: O(n)
     # space complexity: O(n)
     def Fibonacci_r_m(self):
         ans_r_m = []       
-        mylist = []
-        mylist.append(0)  #first
-        mylist.append(1)  #second
-        for i in xrange(0,self.length):
-            ans_r_m.append(self.__Fibonacci_r_m_h(mylist,i))
+        ans_r_m.append(0)  #first
+        ans_r_m.append(1)  #second
+        self.__Fibonacci_r_m_h(ans_r_m,self.length-1)
         return ans_r_m
     
-    # recursion with memoization helper
-    def __Fibonacci_r_m_h(self,mylist,n):
+    # memoization helper
+    def __Fibonacci_r_m_h(self,ans_r_m,n):
         try:
-            return mylist[n]
+            return ans_r_m[n]
         except:
-            mylist.append(self.__Fibonacci_r_m_h(mylist,n-1)+self.__Fibonacci_r_m_h(mylist,n-2))
-            return mylist[n]
+            ans_r_m.append(self.__Fibonacci_r_m_h(ans_r_m,n-1)+self.__Fibonacci_r_m_h(ans_r_m,n-2))
+            return ans_r_m[n]
     
-    # dynamic programming
+    # dynamic programming (bottom-up)
     # time complexity: O(n)
     # space complexity: O(n)
     def Fibonacci_dp(self):
