@@ -9,21 +9,41 @@ Created by: TigerApps
 import random
 
 # selection sort
-# time complexity:
-# space complexity:
+# time complexity: O(n^2)
+# space complexity: O(1)
 def selection(arr):
+    n = len(arr)
+    for i in range(n):
+        small = i
+        for j in range(i+1,n):
+            if arr[j] < arr[small]:
+                j , small = small , j
+        arr[i] , arr[small] = arr[small] , arr[i]
     return arr
 
 # bubble sort
-# time complexity:
-# space complexity:
+# time complexity: O(n^2)
+# space complexity: O(1)
 def bubble(arr):
+    n = len(arr)
+    for i in range(n):
+        for j in range(n-1-i):
+            if arr[j] > arr[j+1]:
+                arr[j] , arr[j+1] = arr[j+1] , arr[j]
     return arr
 
 # insertion sort
-# time complexity:
-# space complexity:
+# time complexity: O(n^2)
+# space complexity: O(1)
 def insertion(arr):
+    n = len(arr)
+    for i in range(1,n):
+        temp = i
+        for j in range(i-1,-1,-1):
+            if arr[j] > arr[temp]:
+                arr[j] , arr[temp] = arr[temp] , arr[j]
+                temp = j
+
     return arr
 
 # merge sort
@@ -44,10 +64,10 @@ def quick(arr):
 def heap(arr):
     return arr
 
-
+#array ofrandom ints
 arr = []
-n = 10
-for i in range(n):  #array of random ints
+n = 16
+for i in range(n):  
     arr.append(random.randint(0,100))
 
 l1 = arr[:]
