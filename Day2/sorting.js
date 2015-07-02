@@ -5,6 +5,7 @@ Program to Sort an array
 var input = [4,4,5,1,2,10,3];
 console.log("Input String => " + input);
 
+
 /*
 Selection Sort
 TIme Complexity: O(n^2)
@@ -25,6 +26,7 @@ for (i=0; i<input_sel.length; i++) {
 	input_sel[i] = min;
 }
 console.log("Selection Sort => " + input_sel)
+
 
 /*
 Bubble Sort
@@ -47,3 +49,23 @@ for (i=0; i<input_bub.length; i++) {
 		break;
 }
 console.log("Bubble Sort => " + input_bub);
+
+
+/*
+Insertion Sort
+TIme Complexity: O(n^2)
+Space Complexity: O(1)
+ */
+var input_ins = input.slice(),
+	curr;
+for(i=1; i<input_ins.length; i++) {
+	curr = input_ins[i];
+	for (j=i-1; j>=0; j--) {
+		if (input_ins[j] > curr) {
+			input_ins[j+1] = input_ins[j];
+		} else
+			break;
+	}
+	input_ins[j+1] = curr;
+}
+console.log("Insertion Sort => " + input_ins);

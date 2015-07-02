@@ -7,6 +7,7 @@ var num = process.argv[2],
 	second = 1,
 	curr;
 
+
 /*
 Iterative
 Time Complexity: O(n)
@@ -24,6 +25,7 @@ else if (num > 1) {
 	}
 }
 console.log("Iterative => " + curr);
+
 
 /*
 Recursive
