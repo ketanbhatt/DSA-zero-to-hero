@@ -32,15 +32,15 @@ Recursive
 Time Complexity: Exponential
 Space Complexity: Exponential
  */
-var fibo_rec = function(x) {
+var fiboRec = function(x) {
 	if (x == 0)
 		return 0;
 	else if (x == 1)
 		return 1;
 	else
-		return fibo_rec(x-1) + fibo_rec(x-2);
+		return fiboRec(x-1) + fiboRec(x-2);
 }
-console.log("Recursive bitches! => " + fibo_rec(num))
+console.log("Recursive bitches! => " + fiboRec(num))
 
 
 /*
@@ -51,15 +51,15 @@ Space Complexity: O(n)
 var cache = [];
 cache.push(0);
 cache.push(1);
-var fibo_mem = function(x) {
+var fiboMem = function(x) {
 	if (x < cache.length) {
 		return cache[x];
 	} else {
-		cache[x] = fibo_mem(x-1) + fibo_mem(x-2);
+		cache[x] = fiboMem(x-1) + fiboMem(x-2);
 		return cache[x];
 	}
 }
-console.log("Memoization => " + fibo_mem(num))
+console.log("Memoization => " + fiboMem(num))
 
 
 /*
@@ -67,7 +67,7 @@ Dynamic Programming
 Time Complexity: O(n)
 Space Complexity: O(n)
  */
-var fibo_dp = function(x) {
+var fiboDp = function(x) {
 	var mem = [];
 	mem.push(0);
 	mem.push(1);
@@ -77,4 +77,4 @@ var fibo_dp = function(x) {
 	
 	return mem[x]; 
 }
-console.log("Dynamic Programming => " + fibo_dp(num))
+console.log("Dynamic Programming => " + fiboDp(num))
