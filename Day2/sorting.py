@@ -78,12 +78,26 @@ def merge_h(arr,s,e):
             l += 1
     return arr      
 
-
 # quick sort
-# time complexity:
-# space complexity:
+# time complexity: O(nLog(n))
+# space complexity: O(Log(n))
 def quick(arr,s,e):
+    if s>=e:
+        return arr
+    partition = quick_h(arr,s,e)
+    quick(arr,s,partition-1)
+    quick(arr,partition+1,e)
     return arr
+
+# partition fucntion
+def quick_h(arr,s,e):
+    j = s
+    for i in range(s,e):
+        if arr[i]<=arr[e]:
+            arr[i] , arr[j] = arr[j] , arr[i]
+            j += 1
+    arr[j] , arr[e] = arr[e] , arr[j]
+    return j
 
 # heap sort
 # time complexity:
@@ -104,12 +118,12 @@ l4 = arr[:]
 l5 = arr[:]
 l6 = arr[:]
 
-print "Array:           ",arr
-print "Sorted Array:    ",sorted(arr)
-print "Selection Sort:  ",selection(l1,n)
-print "Bubble Sort:     ",bubble(l2,n)
-print "Insertion Sort:  ",insertion(l3,n)
-print "Merge Sort:      ",merge(l4,0,n-1)
-print "Quick Sort:      ",quick(l5,0,n-1)
-print "Heap Sort:       ",heap(l6)
+print "Array:          ",arr
+print "Sorted Array:   ",sorted(arr)
+print "Selection Sort: ",selection(l1,n)
+print "Bubble Sort:    ",bubble(l2,n)
+print "Insertion Sort: ",insertion(l3,n)
+print "Merge Sort:     ",merge(l4,0,n-1)
+print "Quick Sort:     ",quick(l5,0,n-1)
+print "Heap Sort:      ",heap(l6)
 
