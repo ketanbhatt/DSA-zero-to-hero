@@ -7,6 +7,7 @@ Created by: TigerApps
 '''
 
 import random
+import math
 
 # selection sort
 # time complexity: O(n^2)
@@ -35,12 +36,12 @@ def bubble(arr,n):
 # space complexity: O(1)
 def insertion(arr,n):
     for i in range(1,n):
-        temp = i
-        for j in range(i-1,-1,-1):
-            if arr[j] > arr[temp]:
-                arr[j] , arr[temp] = arr[temp] , arr[j]
-                temp = j
-
+        temp = arr[i]
+        j = i-1
+        while j >= 0 and arr[j] > temp:
+            arr[j+1] = arr[j]
+            j -= 1
+        arr[j+1] = temp            
     return arr
 
 # merge sort
@@ -105,6 +106,23 @@ def quick_h(arr,s,e):
 def heap(arr):
     return arr
 
+# shell sort
+# time complexity: O(n^(3/2))
+# space complexity: O(1)
+def shell(arr):
+    n = len(arr)
+    gap = int(math.pow(2,math.floor(math.log(n,2))-1))-1 # 2^k - 1
+    while gap>=1:
+        for i in range(1,n):
+            temp = arr[i]
+            j = i - gap
+            while j>=0 and arr[j] > temp:
+                arr[j+gap] = arr[j]
+                j -= gap
+            arr[j+gap] = temp
+        gap = ((gap + 1 ) / 2 ) - 1
+    return arr
+
 #array ofrandom ints
 arr = []
 n = 15
@@ -126,4 +144,5 @@ print "Insertion Sort: ",insertion(l3,n)
 print "Merge Sort:     ",merge(l4,0,n-1)
 print "Quick Sort:     ",quick(l5,0,n-1)
 print "Heap Sort:      ",heap(l6)
+print "Shell Sort:     ",shell(l6)
 
