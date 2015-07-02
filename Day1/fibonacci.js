@@ -2,7 +2,7 @@
 Program to find the Nth fibonacci number
  */
 
-var num = process.argv[2] -1,
+var num = process.argv[2],
 	first = 0, 
 	second = 1,
 	curr;

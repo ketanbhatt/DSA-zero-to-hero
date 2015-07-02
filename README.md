@@ -2,6 +2,7 @@
 
 ### Index
 1. [Fibonacci](Day1/)
+2. [Sorting](Day2/)
 
 
 
