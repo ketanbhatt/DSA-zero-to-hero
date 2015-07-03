@@ -4,7 +4,11 @@ Program to Sort an array
 
 var input = [4,4,5,1,2,10,3];
 console.log("Input String => " + input);
-
+var swap = function(items, obj1, obj2) {
+	var temp = items[obj1];
+	items[obj1] = items[obj2];
+	items[obj2] = temp;
+}
 
 /*
 Selection Sort
@@ -37,9 +41,7 @@ for (i=0; i<input_bub.length; i++) {
 	var flag = 0;
 	for (j=0; j<input_bub.length - i; j++) {
 		if(input_bub[j] > input_bub[j+1]) {
-			var temp = input_bub[j];
-			input_bub[j] = input_bub[j+1];
-			input_bub[j+1] = temp;
+			swap(input_bub, j, j+1);
 			flag = 1;
 		}
 	}
@@ -95,3 +97,32 @@ var merge = function (left, right) {
       return A.concat(left.slice(i)).concat(right.slice(j));
 }
 console.log("Merge Sort => " + mergeSort(input_mer))
+
+
+/*
+Quick Sort
+TIme Complexity: Average O(nlogn), Worst O(n^2)
+Space Complexity: O(logn)
+ */
+var input_qck = input.slice();
+var quickSort = function(A, start, end) {
+	if(start < end) {
+		var PIndex = partition(A, start, end);
+		quickSort(A, start, PIndex-1);
+		quickSort(A, PIndex+1, end);
+	}
+	return A;
+}
+var partition = function(A, start, end)  {
+	var pivot = A[end];
+	var PIndex = start;
+	for (i=start; i<end; i++) {
+		if(A[i] <= pivot) {
+			swap(A, i, PIndex);
+			PIndex++;
+		}
+	}
+	swap(A, end, PIndex);
+	return PIndex;
+}
+console.log(quickSort(input_qck, 0, input_qck.length-1));

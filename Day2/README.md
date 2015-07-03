@@ -4,4 +4,5 @@
 3. Insertion Sort
 4. Merge Sort
 5. Quick Sort
-6. Heap Sort
+6. Heap Sort (TODO: JS, Python)
+7. Shell Sort (TODO: JS)
