@@ -125,4 +125,4 @@ var partition = function(A, start, end)  {
 	swap(A, end, PIndex);
 	return PIndex;
 }
-console.log(quickSort(input_qck, 0, input_qck.length-1));
+console.log("Quicksort => " + quickSort(input_qck, 0, input_qck.length-1));
