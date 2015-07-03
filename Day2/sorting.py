@@ -123,6 +123,38 @@ def shell(arr):
         gap = ((gap + 1 ) / 2 ) - 1
     return arr
 
+# heap sort
+# time complexity: O(nLog(n))
+# space complexity: O(1)
+class heap:
+	def __init__(self,arr):
+		self.list = arr[:]
+		self.n = len(arr)
+		self.heapsort()	
+
+	def __str__(self):
+		return ''.join(str(self.list))
+
+	def __heapify(self,i,l):
+		left = 2 * i + 1
+		right = left + 1
+		large = i
+		if left < l and self.list[left] > self.list[large]:
+			large = left
+		if right < l and self.list[right] > self.list[large]:
+			large = right
+		self.list[i] , self.list[large] = self.list[large] , self.list[i]
+		if large != i:
+			self.__heapify(large,l)
+
+	def heapsort(self):
+		for i in range(self.n/2,-1,-1):
+			self.__heapify(i,self.n)
+		for i in range(self.n):
+			self.list[n-i-1] , self.list[0] = self.list[0] , self.list[n-i-1]
+			self.__heapify(0,n-i-1)
+
+
 #array ofrandom ints
 arr = []
 n = 15
@@ -135,6 +167,7 @@ l3 = arr[:]
 l4 = arr[:]
 l5 = arr[:]
 l6 = arr[:]
+l7 = arr[:]
 
 print "Array:          ",arr
 print "Sorted Array:   ",sorted(arr)
@@ -143,6 +176,6 @@ print "Bubble Sort:    ",bubble(l2,n)
 print "Insertion Sort: ",insertion(l3,n)
 print "Merge Sort:     ",merge(l4,0,n-1)
 print "Quick Sort:     ",quick(l5,0,n-1)
-print "Heap Sort:      ",heap(l6)
 print "Shell Sort:     ",shell(l6)
+print "Heap Sort:      ",heap(l7)
 
