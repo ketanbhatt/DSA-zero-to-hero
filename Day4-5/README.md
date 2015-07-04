@@ -1,4 +1,4 @@
-## Day 4 : From [GeeksForGeeks](http://www.geeksforgeeks.org/data-structures/#LinkedList)
+## Day 4-5 : From [GeeksForGeeks](http://www.geeksforgeeks.org/data-structures/#LinkedList)
 1.	Linked List Insertion and Deletion
 2.	Find Length of a Linked List (Iterative and Recursive)
 3.	Search an element in a Linked List (Iterative and Recursive)
