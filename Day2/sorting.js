@@ -126,3 +126,42 @@ var partition = function(A, start, end)  {
 	return PIndex;
 }
 console.log("Quicksort => " + quickSort(input_qck, 0, input_qck.length-1));
+
+
+/*
+Heap Sort
+TIme Complexity: O(nlogn)
+Space Complexity: O(1)
+ */
+var input_heap = input.slice(),
+	heapSize;
+var maxHeapify = function (A, heapSize, i) {
+	var left = 2*i;
+	var right = 2*i + 1;
+	var largest;
+	if(left <= heapSize && A[left] > A[i])
+		largest = left;
+	else
+		largest = i;
+	if(right <= heapSize && A[right] > A[largest])
+		largest = right;
+	if(largest != i) {
+		swap(A, i, largest);
+		maxHeapify(A, heapSize, largest);
+	}
+}
+var buildMaxHeap = function(A, heapSize) {
+	for(i = Math.floor(A.length/2); i>=0; i--)
+		maxHeapify(A, heapSize, i);
+}
+var heapSort = function(A) {
+	heapSize = A.length - 1;
+	buildMaxHeap(A, heapSize);
+	for(i = A.length - 1; i>0; i--) {
+		swap(A, i, 0);
+		heapSize = heapSize - 1;
+		maxHeapify(A, heapSize, 0);
+	}
+}
+heapSort(input_heap);
+console.log("Heap Sort => " + input_heap);

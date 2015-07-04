@@ -4,11 +4,11 @@
 1. [Day 1 - Fibonacci](Day1/)
 2. [Day 2 - Sorting](Day2/)
 3. Day 3 - Read about graphs, trees and heaps enough to implement Heap Sort
+4. [Day 4-5 - Linked Lists](Day4-5/)
 
 
 ### Coming up next
-1. Linked Lists
-2. More on graphs and trees, BST
+1. More on graphs and trees, BST
 
 ### TO DO
 1. Make sort functions take comparators so they can sort classes too.
