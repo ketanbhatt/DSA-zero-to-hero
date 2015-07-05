@@ -52,6 +52,7 @@ LinkedList.prototype = {
 	},
 
 	item: function(index) {
+		index = Math.floor(index);
 		var length = this.size();
 		if(index >= 0 && index < length ) {
 			var current = this._head,
@@ -118,16 +119,7 @@ LinkedList.prototype = {
 		return count;
 	},
 
-	sizeRecursive: function(node) {
-		if(typeof(node) == "undefined") 
-			node = this._head
-		if(node == null)
-			return 0;
-		else
-			return 1 + this.sizeRecursive(node.next);
-	},
-
-	searchIterative: function(key) {
+	search: function(key) {
 		var current = this._head,
 			flag = 0;
 		while(current) {
@@ -140,19 +132,54 @@ LinkedList.prototype = {
 		}
 		if(flag == 0)
 			return false;
-	},
-
-	searchRecursive: function(key, node) {
-		if(typeof(node) == "undefined") 
-			node = this._head
-		if(node == null)
-			return false;
-		else if(node.data == key)
-			return true;
-		else 
-			return false || this.searchRecursive(key, node.next)
 	}
 
 };
 
+
+// Get size of LL recusrively
+LinkedList.prototype.sizeRecursive = function(node) {
+	if(typeof(node) == "undefined") 
+		node = this._head
+	if(node == null)
+		return 0;
+	else
+		return 1 + this.sizeRecursive(node.next);
+};
+
+// Search for key in LL recusrively
+LinkedList.prototype.searchRecursive = function(key, node) {
+	if(typeof(node) == "undefined") 
+		node = this._head
+	if(node == null)
+		return false;
+	else if(node.data == key)
+		return true;
+	else 
+		return false || this.searchRecursive(key, node.next)
+};
+
 var LL = new LinkedList();
+LL.push(1);
+LL.push(2);
+LL.push(3);
+// LL.push(4);
+// LL.push(5);
+// LL.push(6);
+
+// Printing middle node in the LL
+// console.log(LL.item(LL.size()/2));
+// Or another smart way
+LinkedList.prototype.getMiddle = function() {
+	if(this._head == null)
+		return null;
+	var turtle = this._head,
+		rabbit = this._head;
+	while(rabbit !== "null") {
+		turtle = turtle.next;
+		rabbit = turtle.next;
+	}
+	return turtle.data;
+}
+
+console.log(LL.getMiddle())
