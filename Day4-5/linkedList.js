@@ -60,7 +60,7 @@ LinkedList.prototype = {
 			while(i++ < index) {
 				current = current.next
 			}
-			return current.data;
+			return current;
 		} else 
 			return "Invalid index missus!";
 	},
@@ -132,6 +132,15 @@ LinkedList.prototype = {
 		}
 		if(flag == 0)
 			return false;
+	},
+
+	// Dont do this
+	makeCycle: function() {
+		current = this._head;
+		while(current.next) {
+			current = current.next;
+		}
+		current.next = this._head;
 	}
 
 };
@@ -161,25 +170,121 @@ LinkedList.prototype.searchRecursive = function(key, node) {
 
 var LL = new LinkedList();
 LL.push(1);
-LL.push(2);
-LL.push(3);
-// LL.push(4);
-// LL.push(5);
-// LL.push(6);
+LL.push(4);
+LL.push(6);
+LL.push(8);
+LL.push(9);
+
+var LL2 = new LinkedList();
+LL2.push(0);
+LL2.push(2);
+LL2.push(3);
+LL2.push(8);
+LL2.push(10);
+LL2.push(11);
+LL2.push(15);
 
 // Printing middle node in the LL
-// console.log(LL.item(LL.size()/2));
-// Or another smart way
-LinkedList.prototype.getMiddle = function() {
-	if(this._head == null)
-		return null;
-	var turtle = this._head,
-		rabbit = this._head;
-	while(rabbit !== "null") {
-		turtle = turtle.next;
-		rabbit = turtle.next;
+console.log(LL.item(LL.size()/2).data);
+
+LinkedList.prototype.printReverse = function() {
+	var current = this._head,
+		array = [],
+		reverse = [];
+	while(current) {
+		array.push(current.data);
+		current = current.next;
 	}
-	return turtle.data;
+	var size = array.length;
+	for(i=0; i<size; i++)
+		reverse.push(array.pop());
+
+	return reverse;
 }
 
-console.log(LL.getMiddle())
+LinkedList.prototype.reverseLinkedList = function() {
+	var current = this._head,
+		length = this.size(),
+		previous, next;
+	if(length > 1) {
+		next = current.next;
+		current.next = null;
+		previous = current;
+		current = next;
+		while(current) {
+			next = current.next;
+			current.next = previous;
+			previous = current;
+			current = next;
+		}
+		this._head = previous;
+	}	
+}
+
+// LL.reverseLinkedList();
+// LL.print();
+
+LinkedList.prototype.concatLL = function(L, index) {
+	for(i=0; i<index; i++) {
+		try {
+			L = L.next;
+		} catch (e) {
+			return;
+		}
+	}
+	while(L) {
+		this.push(L.data);
+		L = L.next;
+	}
+}
+
+var mergeLL = function(L1, L2) {
+	var L1current = L1.item(0),
+		L2current = L2.item(0),
+		mergedLL = new LinkedList(),
+		countL1 = 0, countL2 = 0;
+
+	while(L1current && L2current) {
+		if(L1current.data < L2current.data) {
+			mergedLL.push(L1current.data);
+			L1current = L1current.next;
+			countL1++;
+		} else {
+			mergedLL.push(L2current.data);
+			L2current = L2current.next;
+			countL2++;
+		}
+	}
+
+	mergedLL.concatLL(L1.item(0), countL1)
+	mergedLL.concatLL(L2.item(0), countL2)
+	return	mergedLL;
+}
+
+var MLL = mergeLL(LL, LL2);
+MLL.print();
+
+// MLL.makeCycle();
+
+var detectCycle = function(LL) {
+	var turtle = LL._head,
+		hare = LL._head;
+	while(true) {
+		if(!hare.next)
+			return false;
+
+		hare = hare.next;
+
+		if(!hare.next)
+			return false;
+
+		hare = hare.next;
+		turtle = turtle.next
+
+		if(hare == turtle)
+			return true;
+	}
+}
+
+console.log(detectCycle(MLL));
+

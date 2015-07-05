@@ -1,1 +1,1 @@
-## Day 4-5 : From [HackerRank - Linked Listsl](https://www.hackerrank.com/domains/data-structures/linked-lists/page/1)
+## Day 4-5 : From [HackerRank - Linked Lists](https://www.hackerrank.com/domains/data-structures/linked-lists/page/1)
