@@ -89,6 +89,24 @@ class LinkedList:
 			curr = curr.next
 		print ""
 		
+	# print kth node from last
+	# time complexity: O(n)
+	# space complexity: O(1)
+	def print_k(self,position):
+		if not self.head:
+			return
+		curr = self.head
+		curr_fast = self.head
+		while curr_fast and position:
+			curr_fast = curr_fast.next
+			position -= 1
+		if not curr_fast:
+			return None
+		while curr_fast.next:
+			curr = curr.next
+			curr_fast = curr_fast.next
+		return curr
+
 	# print the linked list ub reverse order
 	# time complexity: O(n)
 	# space complexity: O(1)
@@ -146,24 +164,22 @@ class LinkedList:
 			curr = next
 		self.head = prev
 
-
-	# print kth node from last
+	# pairwise swap the nodes of a linked list
 	# time complexity: O(n)
 	# space complexity: O(1)
-	def print_k(self,position):
+	def pairWiseSwap(self):
 		if not self.head:
 			return
 		curr = self.head
-		curr_fast = self.head
-		while curr_fast and position:
-			curr_fast = curr_fast.next
-			position -= 1
-		if not curr_fast:
-			return None
-		while curr_fast.next:
+		prev = curr
+		self.head = curr.next
+		while curr and curr.next:
+			next = curr.next
+			prev.next = next
+			curr.next = next.next
+			next.next = curr
+			prev = curr
 			curr = curr.next
-			curr_fast = curr_fast.next
-		return curr
 
 	# delete duplicate nodes in a sorted linked list
 	# time complexity: O(n)
@@ -292,7 +308,7 @@ def FindMergeNode(list1,list2):
 # generate a sorted linked of random elements and print it
 mylist = LinkedList()
 n = 15
-for i in range(15):  
+for i in range(n):  
 	temp = random.randint(0,100)
  	mylist.insert_sorted(temp,compare_int)
 
