@@ -1,3 +1,11 @@
+'''
+
+Name:    Linked List                                
+Purpose: Various operations on singly linked list                                       
+Created by: TigerApps                                 
+
+'''
+
 import random
 
 # LinkedList object
@@ -22,7 +30,6 @@ class LinkedList:
 		new.next = self.head
 		self.head = new
 
-
 	# insert at tail
 	# time complexity: O(n)
 	# space complexity: O(1)
@@ -35,8 +42,6 @@ class LinkedList:
 			curr.next = new
 		else:
 			self.head = new
-
-
 
 	# insert at position k
 	# time complexity: O(k)
@@ -82,7 +87,7 @@ class LinkedList:
 	# print the linked list
 	# time complexity: O(n)
 	# space complexity: O(1)
-	def printlist(self):
+	def printList(self):
 		curr = self.head
 		while curr:
 			print curr,
@@ -107,10 +112,10 @@ class LinkedList:
 			curr_fast = curr_fast.next
 		return curr
 
-	# print the linked list ub reverse order
+	# print the linked list in reverse order
 	# time complexity: O(n)
 	# space complexity: O(1)
-	def printlistreverse(self,curr):
+	def printListReverse(self,curr):
 		if not curr:
 			return
 		self.printlistreverse(curr.next)	
@@ -226,6 +231,57 @@ class LinkedList:
 			curr_fast = curr_fast.next.next
 		return False
 
+
+	# rotate the linked list counter-clockwise by k nodes
+	# time complexity: O(n)
+	# space complexity: O(1)
+	def Rotate(self,k):
+		if not k:
+			return
+		curr = self.head
+		prev = None
+		while curr and k:
+			prev = curr
+			curr = curr.next
+			k -= 1
+		if curr:
+			head = curr
+			while curr.next:
+				curr = curr.next
+			curr.next = self.head
+			self.head = head
+			prev.next = None
+
+	# check if the linked list is a palindrome
+	# time complexity: O(n)
+	# space complexity: O(1)
+	def isPalindrome(self):
+		if not self.head:
+			return
+		slow = self.head
+		fast = slow
+
+		while fast.next and fast.next.next:	#saves mid in slow
+			fast = fast.next.next
+			slow = slow.next
+
+		second = slow.next	#second half
+		first = self.head 	#first half
+		self.head = second
+		self.reverse() 		#reverse second half
+		curr = first
+		second = self.head  #reverse second half
+		while second:
+			if second.data != curr.data:
+				self.reverse()
+				self.head = first
+				return False
+			second = second.next
+			curr = curr.next
+		self.reverse()
+		self.head = first
+		return True
+
 # comparator
 def compare_int(a,b):
 	return a<=b
@@ -244,10 +300,36 @@ def CompareLists(list1,list2):
 	else:
 		return False
 
-# merge two sorted linked lists in a sorted way
+# merge sort a linked list
+# time complexity: O(nLogn)
+# space complexity: O(n+m)
+def MergeSort(first,comparator):
+	if not first.head or not first.head.next:
+		return first
+	firstTail = Mid(first.head)
+	second = LinkedList()
+	second.head =  firstTail.next 
+	firstTail.next = None
+	
+	first = MergeSort(first,comparator)
+	second = MergeSort(second,comparator)
+	
+	return Merge(first,second,comparator)
+	
+def Mid(node):
+	if not node or not node.next:
+		return node
+	slow = node
+	fast = slow
+	while fast.next and fast.next.next:
+		fast = fast.next.next
+		slow = slow.next
+	return slow
+
+# merge two sorted linked lists
 # time complexity: O(n)
 # space complexity: O(n+m)
-def MergeSorted(list1,list2,comparator):
+def Merge(list1,list2,comparator):
 	curr1 = list1.head
 	curr2 = list2.head
 	mylist = LinkedList()
@@ -268,6 +350,67 @@ def MergeSorted(list1,list2,comparator):
 			curr.next = curr2
 	mylist.delete_k(0)
 	return mylist
+
+
+# # quick sort a linked list
+# # time complexity: O(nLogn)
+# # space complexity: O(1)
+# def QuickSort(mylist,comparator):
+# 	curr = mylist.head
+# 	while curr.next:
+# 		curr = curr.next
+# 	mylist = QuickSort_h(mylist,curr,comparator)
+
+
+# def QuickSort_h(first,end,comparator):
+# 	if not first.head or not first.head.next:
+# 		return first
+
+# 	first.head,end,pivot = Partition(first,end,comparator)
+
+# 	if first.head != pivot:
+# 		curr = first.head
+# 		while curr.next != pivot:
+# 			curr = curr.next
+# 		curr.next = None
+# 		first = QuickSort_h(first,curr,comparator)
+# 		curr = first.head
+# 		while curr.next:
+# 			curr = curr.next
+# 		curr.next = pivot
+
+# 	second = LinkedList()
+# 	second = QuickSort_h(second,end,comparator)
+# 	pivot.next = second.head
+# 	return first
+
+
+# def Partition(mylist,end,comparator):
+# 	tail = pivot = end
+# 	curr = mylist.head
+# 	prev = None
+# 	newhead = None
+# 	while curr != pivot:
+# 		temp = curr.next
+# 		if comparator(curr.data,pivot.data):
+# 			if not newhead:
+# 				newhead = curr
+# 			prev = curr
+# 			curr = curr.next
+# 		else:
+# 			if prev:
+# 				prev.next = curr.next
+# 			temp = curr.next
+# 			curr.next = None
+# 			tail.next = curr
+# 			tail = tail.next
+# 			curr = temp
+
+# 	if not newhead:
+# 		newhead = pivot
+# 	return newhead,tail,pivot
+
+
 
 # merge point of 2 linked lists
 # time complexity: O(n)
@@ -304,12 +447,63 @@ def FindMergeNode(list1,list2):
 		curr2 = curr2.next
 	return None
 
+# add two numbers represented by linked lists
+# time complexity: O(n+m)
+# space complexity: O(1)
+def add(list1,list2):
+	list1.reverse()
+	list2.reverse()
+
+	result = LinkedList()
+
+	curr1 = list1.head
+	curr2 = list2.head
+
+	carry = 0
+	while curr1 and curr2:
+		sum = curr1.data + curr2.data +carry
+		carry = sum/10
+		sum %= 10
+		result.insert_head(sum)
+		curr1 = curr1.next
+		curr2 = curr2.next
+
+	if curr1:
+		while curr1:
+			sum = curr1.data + carry
+			carr = sum/10
+			sum %= 10
+			result.insert_head(sum)
+			curr1 = curr1.next
+	elif curr2:
+		while curr2:
+			sum = curr2.data + carry
+			carr = sum/10
+			sum %= 10
+			result.insert_head(sum)
+			curr2 = curr2.next
+	if carry:
+		result.insert_head(carry)
+	list1.reverse()
+	list2.reverse()
+	return result
 
 # generate a sorted linked of random elements and print it
-mylist = LinkedList()
-n = 15
-for i in range(n):  
-	temp = random.randint(0,100)
- 	mylist.insert_sorted(temp,compare_int)
+myList = LinkedList()
+# n = 2
+# for i in range(n):  
+# 	temp = random.randint(0,100)
+# 	myList.insert_tail(temp)
 
-mylist.printlist()
+myList.insert_tail(12)
+myList.insert_tail(150)
+myList.insert_tail(50)
+
+myList.insert_tail(570)
+myList.insert_tail(51)
+
+print "Linked List:" 
+myList.printList()
+myList2 = QuickSort(myList,compare_int)
+print "mylist:",myList.printList()
+print "mylist2:",myList2.printList()

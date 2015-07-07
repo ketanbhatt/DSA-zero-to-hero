@@ -3,8 +3,8 @@
 ### Index
 1. [Day 1: Fibonacci](Day1/)
 2. [Day 2-3: Sorting Array](Day2-3/)
-3. [Day 4-5-6: Linked Lists](Day4-5-6/)
-4. [Day 6-7-8: Trees](Day6-7-8/)
+3. [Day 4-6: Linked Lists](Day4-6/)
+4. [Day 6-8: Trees](Day6-8/)
 
 
 ### Coming up next

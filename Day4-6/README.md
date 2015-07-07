@@ -1,4 +1,4 @@
-## Day 4-5-6 Linked Lists: 
+## Day 4-6 Linked Lists: 
  * [HackerRank - Linked Lists](https://www.hackerrank.com/domains/data-structures/linked-lists/page/1)
  * [GeeksforGeeks - Linked Lists](http://www.geeksforgeeks.org/data-structures/#LinkedList)
 

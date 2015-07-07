@@ -1,6 +1,6 @@
 '''
 
-Name:    Sorting                                       
+Name:    Sorting Array                                      
 Purpose: Sort the given array of numbers in ascending order                                       
 Created by: TigerApps                                 
 
@@ -176,12 +176,13 @@ class heap:
             self.__heapify(0,n-i-1)
         return self.list
 
-#array ofrandom ints
+#array of random integers
 arr = []
 n = 15
 for i in range(n):  
     arr.append(random.randint(0,100))
 
+print "Sorting Array"
 print "Array:          ",arr
 print "Sorted Array:   ",sorted(arr)
 print "Selection Sort: ",selection(compare_int,arr,n)

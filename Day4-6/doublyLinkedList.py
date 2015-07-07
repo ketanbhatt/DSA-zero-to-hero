@@ -1,7 +1,15 @@
+'''
+
+Name:    Linked List                                
+Purpose: Various operations on double linked list                                       
+Created by: TigerApps                                 
+
+'''
+
 import random
 
 # Doubly LinkedList object
-class LinkedList:
+class DoublyLinkedList:
     def __init__(self):
         self.head = None
         self.tail = None
@@ -49,7 +57,7 @@ class LinkedList:
     # print the linked list
     # time complexity: O(n)
     # space complexity: O(1)
-    def printlist(self):
+    def printList(self):
         curr = self.head
         while curr:
             print curr,
@@ -59,7 +67,7 @@ class LinkedList:
     # print the linked list in reverse
     # time complexity: O(n)
     # space complexity: O(1)
-    def printlistreverse(self):
+    def printListReverse(self):
         curr = self.tail
         while curr:
             print curr,
@@ -90,15 +98,15 @@ def compare_int(a,b):
 
 # generate a sorted linked of random elements and print it
 print "\nDoubly Linked List: "
-mylist = LinkedList()
+myList = DoublyLinkedList()
 n = 15
 
 for i in range(n):  
     temp = random.randint(0,100)
-    mylist.insert_sorted(temp,compare_int)
+    myList.insert_sorted(temp,compare_int)
 
-mylist.printlist()
-mylist.printlistreverse()
+myList.printList()
+myList.printListReverse()
 
 
 # Non Flat LinkedList object
@@ -159,7 +167,7 @@ class NFLinkedList:
 
 # generate a non flat list
 print "\nNon Flat Linked List: "
-mynflist = NFLinkedList()
+myNFList = NFLinkedList()
 
 # Let us create the following linked list
 #       5 -> 10 -> 19 -> 28
@@ -174,30 +182,31 @@ mynflist = NFLinkedList()
 #       30               45
 
 
-mynflist.head = mynflist.push( mynflist.head, 30 )
-mynflist.head = mynflist.push( mynflist.head, 8 )
-mynflist.head = mynflist.push( mynflist.head, 7 )
-mynflist.head = mynflist.push( mynflist.head, 5 )
+myNFList.head = myNFList.push( myNFList.head, 30 )
+myNFList.head = myNFList.push( myNFList.head, 8 )
+myNFList.head = myNFList.push( myNFList.head, 7 )
+myNFList.head = myNFList.push( myNFList.head, 5 )
 
-mynflist.head.right = mynflist.push( mynflist.head.right, 20 )
-mynflist.head.right = mynflist.push( mynflist.head.right, 10 )
+myNFList.head.right = myNFList.push( myNFList.head.right, 20 )
+myNFList.head.right = myNFList.push( myNFList.head.right, 10 )
 
-mynflist.head.right.right = mynflist.push( mynflist.head.right.right, 50 )
-mynflist.head.right.right = mynflist.push( mynflist.head.right.right, 22 )
-mynflist.head.right.right = mynflist.push( mynflist.head.right.right, 19 )
+myNFList.head.right.right = myNFList.push( myNFList.head.right.right, 50 )
+myNFList.head.right.right = myNFList.push( myNFList.head.right.right, 22 )
+myNFList.head.right.right = myNFList.push( myNFList.head.right.right, 19 )
 
-mynflist.head.right.right.right = mynflist.push( mynflist.head.right.right.right, 45 )
-mynflist.head.right.right.right = mynflist.push( mynflist.head.right.right.right, 40 )
-mynflist.head.right.right.right = mynflist.push( mynflist.head.right.right.right, 35 )
-mynflist.head.right.right.right = mynflist.push( mynflist.head.right.right.right, 28 )
+myNFList.head.right.right.right = myNFList.push( myNFList.head.right.right.right, 45 )
+myNFList.head.right.right.right = myNFList.push( myNFList.head.right.right.right, 40 )
+myNFList.head.right.right.right = myNFList.push( myNFList.head.right.right.right, 35 )
+myNFList.head.right.right.right = myNFList.push( myNFList.head.right.right.right, 28 )
 
 # print to check
-mynflist.printlist(mynflist.head)
-mynflist.printlist(mynflist.head.right)
-mynflist.printlist(mynflist.head.right.right)
-mynflist.printlist(mynflist.head.right.right.right)
+myNFList.printlist(myNFList.head)
+myNFList.printlist(myNFList.head.right)
+myNFList.printlist(myNFList.head.right.right)
+myNFList.printlist(myNFList.head.right.right.right)
 
 
 # flattening
-mynflist.head = mynflist.flatten(mynflist.head)
-mynflist.printlist(mynflist.head)
+myNFList.head = myNFList.flatten(myNFList.head)
+print "Flattened:",
+myNFList.printlist(myNFList.head)
