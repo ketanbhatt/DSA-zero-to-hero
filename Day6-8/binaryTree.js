@@ -32,6 +32,24 @@ var preOrder = function(t) {
 	preOrder(t.right);
 }
 
+var inOrder = function(t) {
+	if(!t)
+		return;
+
+	inOrder(t.left);
+	console.log(t.data);	
+	inOrder(t.right);
+}
+
+var postOrder = function(t) {
+	if(!t)
+		return;
+
+	postOrder(t.left);
+	postOrder(t.right);
+	console.log(t.data);
+}
+
 
 var myTree = new BinaryTree(1);
 insertBT(myTree, 2);
@@ -44,3 +62,8 @@ insertBT(myTree, 8);
 insertBT(myTree, 9);
 insertBT(myTree, 10);
 preOrder(myTree);
+console.log("*")
+inOrder(myTree);
+console.log("*")
+postOrder(myTree);
+
