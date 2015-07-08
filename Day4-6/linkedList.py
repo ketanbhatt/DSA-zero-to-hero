@@ -352,63 +352,59 @@ def Merge(list1,list2,comparator):
 	return mylist
 
 
-# # quick sort a linked list
-# # time complexity: O(nLogn)
-# # space complexity: O(1)
-# def QuickSort(mylist,comparator):
-# 	curr = mylist.head
-# 	while curr.next:
-# 		curr = curr.next
-# 	mylist = QuickSort_h(mylist,curr,comparator)
+# quick sort a linked list
+# time complexity: O(nLogn)
+# space complexity: O(1)
+def QuickSort(first,comparator):
+	end = first
+	while end.next:
+		end = end.next
+	return QuickSort_h(first,end,comparator)
 
 
-# def QuickSort_h(first,end,comparator):
-# 	if not first.head or not first.head.next:
-# 		return first
+def QuickSort_h(first,end,comparator):
+	if not first or not first.next:
+		return first
+	first,end,pivot = Partition(first,end,comparator)
+	
+	if first != pivot:
+		curr = first
+		while curr.next != pivot:
+			curr = curr.next
+		curr.next = None
+		first = QuickSort_h(first,curr,comparator)
+		curr = first
+		while curr.next:
+			curr = curr.next
+		curr.next = pivot
+	
+	second = QuickSort_h(pivot.next,end,comparator)
+	pivot.next = second
+	return first
 
-# 	first.head,end,pivot = Partition(first,end,comparator)
+def Partition(first,end,comparator):
+	tail = pivot = end
+	curr = first
+	prev = None
+	newhead = None
+	while curr != pivot:
+		temp = curr.next
+		if comparator(curr.data,pivot.data):
+			if not newhead:
+				newhead = curr
+			prev = curr
+			curr = curr.next
+		else:
+			if prev:
+				prev.next = curr.next
+			curr.next = None
+			tail.next = curr
+			tail = tail.next
+			curr = temp
 
-# 	if first.head != pivot:
-# 		curr = first.head
-# 		while curr.next != pivot:
-# 			curr = curr.next
-# 		curr.next = None
-# 		first = QuickSort_h(first,curr,comparator)
-# 		curr = first.head
-# 		while curr.next:
-# 			curr = curr.next
-# 		curr.next = pivot
-
-# 	second = LinkedList()
-# 	second = QuickSort_h(second,end,comparator)
-# 	pivot.next = second.head
-# 	return first
-
-
-# def Partition(mylist,end,comparator):
-# 	tail = pivot = end
-# 	curr = mylist.head
-# 	prev = None
-# 	newhead = None
-# 	while curr != pivot:
-# 		temp = curr.next
-# 		if comparator(curr.data,pivot.data):
-# 			if not newhead:
-# 				newhead = curr
-# 			prev = curr
-# 			curr = curr.next
-# 		else:
-# 			if prev:
-# 				prev.next = curr.next
-# 			temp = curr.next
-# 			curr.next = None
-# 			tail.next = curr
-# 			tail = tail.next
-# 			curr = temp
-
-# 	if not newhead:
-# 		newhead = pivot
-# 	return newhead,tail,pivot
+	if not newhead:
+		newhead = pivot
+	return newhead,tail,pivot
 
 
 
@@ -490,20 +486,14 @@ def add(list1,list2):
 
 # generate a sorted linked of random elements and print it
 myList = LinkedList()
-# n = 2
-# for i in range(n):  
-# 	temp = random.randint(0,100)
-# 	myList.insert_tail(temp)
-
-myList.insert_tail(12)
-myList.insert_tail(150)
-myList.insert_tail(50)
-
-myList.insert_tail(570)
-myList.insert_tail(51)
+n = 16
+for i in range(n):  
+	temp = random.randint(0,100)
+ 	myList.insert_tail(temp)
 
 print "Linked List:" 
 myList.printList()
-myList2 = QuickSort(myList,compare_int)
-print "mylist:",myList.printList()
-print "mylist2:",myList2.printList()
+
+myList.head = QuickSort(myList.head,compare_int)
+print "mylist:",
+myList.printList()
