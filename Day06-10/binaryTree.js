@@ -23,6 +23,23 @@ var insertBT = function(t, data) {
 	}
 }
 
+var heightTree = function(t) {
+	if(!t)
+		return 0;
+
+	var height = 0;
+	return height = Math.max(heightTree(t.left), heightTree(t.right)) + 1;
+}
+
+var sizeTree = function(t) {
+	if(!t)
+		return 0;
+
+	var size = sizeTree(t.left) + 1 + sizeTree(t.right)
+	return size;
+
+}
+
 var preOrder = function(t) {
 	if(!t)
 		return;
@@ -50,37 +67,217 @@ var postOrder = function(t) {
 	console.log(t.data);
 }
 
-var heightTree = function(t) {
-	if(!t)
-		return 0;
+var levelOrder = function(t) {
+	var queue = [];
+	queue.push(t);
+	while(true) {
+		temp = queue.shift();
 
-	var height = 0;
-	return height = Math.max(heightTree(t.left), heightTree(t.right)) + 1;
+		if(!temp)
+			return;
+
+		console.log(temp.data);
+
+		if(temp.left)
+			queue.push(temp.left);
+		if(temp.right)
+			queue.push(temp.right);
+	}
+}
+
+var levelOrderSpiral = function(t) {
+	var ltr = [], rtl = [], rev = true;
+
+	ltr.push(t);
+	while(ltr[0] || rtl[0]) {
+		
+		while(ltr[0] && rev ) {
+			temp = ltr.pop();
+			if(!temp)
+				return;
+
+			console.log(temp.data);
+
+			if(temp.left)
+				rtl.push(temp.left);
+			if(temp.right)
+				rtl.push(temp.right);
+		}
+		while(rtl[0] && !rev) {
+			temp = rtl.pop();
+			if(!temp)
+				return;
+
+			console.log(temp.data);
+
+			if(temp.right)
+				ltr.push(temp.right);
+			if(temp.left)
+				ltr.push(temp.left);
+		}
+		rev = !rev;	
+
+	}
+}
+
+var verticalOrder = function(t, hd, hash) {
+
+	if(!t)
+		return;
+
+	if(hd in hash)
+		hash[hd].push(t.data);
+	else
+		hash[hd] = [t.data];
+
+	verticalOrder(t.left, hd-1, hash);
+	verticalOrder(t.right, hd+1, hash);
+
+}
+var verticalOrderPrint = function(hash) {
+	var max = Math.max.apply(Math, Object.keys(hash));
+	var min = Math.min.apply(Math, Object.keys(hash));
+
+	for(i=min; i<=max; i++){
+		console.log(hash[i]);
+	}
+}
+
+var topView = function(t, hd, hash) {
+
+	if(!t)
+		return;
+	if(hd in hash)
+		hash[hd].push(t.data)
+	else
+		hash[hd] = [t.data];
+	topView(t.left, hd-1, hash);
+	topView(t.right, hd+1, hash);
+
+}
+var topViewPrint = function(hash) {
+	var max = Math.max.apply(Math, Object.keys(hash))
+	var min = Math.min.apply(Math, Object.keys(hash));
+	for(i = min; i <= max; i++){
+		console.log(hash[i][0]);
+	}
+}
+
+var leftView = function(t, height, hash) {
+	var queue1 = [], queue2 = [], level = 0;
+	queue1.push(t);
+	while(level < height) {
+		if(queue1.length) {
+			while(queue1.length) {
+				temp = queue1.shift();
+
+				if(!temp)
+					break;
+
+				if(level in hash)
+					hash[level].push(temp.data)
+				else
+					hash[level] = [temp.data];
+
+				if(temp.left)
+					queue2.push(temp.left);
+				if(temp.right)
+					queue2.push(temp.right);
+			}
+		} else if(queue2.length) {
+			while(queue2.length) {
+				temp = queue2.shift();
+
+				if(!temp)
+					break;
+
+				if(level in hash)
+					hash[level].push(temp.data)
+				else
+					hash[level] = [temp.data];
+
+				if(temp.left)
+					queue1.push(temp.left);
+				if(temp.right)
+					queue1.push(temp.right);
+			}
+		}
+		level++;
+	}
+}
+
+var bottomViewPrint = function(hash) {
+	var max = Math.max.apply(Math, Object.keys(hash))
+	var min = Math.min.apply(Math, Object.keys(hash));
+	for(i = min; i <= max; i++){
+		console.log(hash[i].pop());
+	}
+}
+
+var mirrorTree = function(t) {
+	if(!t)
+		return;
+
+	mirrorTree(t.left);
+	mirrorTree(t.right);
+	var temp = t.left;
+	t.left = t.right;
+	t.right = temp;
 }
 
 var myTree = new BinaryTree(1);
 insertBT(myTree, 2);
-// insertBT(myTree, 3);
-// insertBT(myTree, 4);
+insertBT(myTree, 3);
+insertBT(myTree, 4);
+insertBT(myTree, 5);
+insertBT(myTree, 6);
+insertBT(myTree, 7);
+insertBT(myTree, 8);
+insertBT(myTree, 9);
+insertBT(myTree, 10);
 // insertBT(myTree, 5);
 // insertBT(myTree, 6);
 // insertBT(myTree, 7);
 // insertBT(myTree, 8);
 // insertBT(myTree, 9);
 // insertBT(myTree, 10);
-// insertBT(myTree, 5);
-// insertBT(myTree, 6);
-// insertBT(myTree, 7);
-// insertBT(myTree, 8);
-// insertBT(myTree, 9);
-// insertBT(myTree, 10);
+
+
+// console.log(heightTree(myTree))
+
+// console.log(sizeTree(myTree))
+
 
 // preOrder(myTree);
-// console.log("*")
+
 // inOrder(myTree);
-// console.log("*")
+
 // postOrder(myTree);
 
-var height = heightTree(myTree)
-console.log(height)
+// levelOrder(myTree);
+
+// levelOrderSpiral(myTree)
+
+// var hash = {};
+// verticalOrder(myTree, 0, hash);
+// verticalOrderPrint(hash);
+
+
+
+// var hash = {};
+// topView(myTree, 0, hash);
+// topViewPrint(hash);
+
+// var hash = {};
+// leftView(myTree, heightTree(myTree), hash);
+// topViewPrint(hash);
+
+var hash = {};
+topView(myTree, 0, hash);
+console.log(hash)
+bottomViewPrint(hash);
+
+// mirrorTree(myTree);
+// levelOrder(myTree);
+
 
