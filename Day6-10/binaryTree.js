@@ -50,20 +50,37 @@ var postOrder = function(t) {
 	console.log(t.data);
 }
 
+var heightTree = function(t) {
+	if(!t)
+		return 0;
+
+	var height = 0;
+	return height = Math.max(heightTree(t.left), heightTree(t.right)) + 1;
+}
 
 var myTree = new BinaryTree(1);
 insertBT(myTree, 2);
-insertBT(myTree, 3);
-insertBT(myTree, 4);
-insertBT(myTree, 5);
-insertBT(myTree, 6);
-insertBT(myTree, 7);
-insertBT(myTree, 8);
-insertBT(myTree, 9);
-insertBT(myTree, 10);
-preOrder(myTree);
-console.log("*")
-inOrder(myTree);
-console.log("*")
-postOrder(myTree);
+// insertBT(myTree, 3);
+// insertBT(myTree, 4);
+// insertBT(myTree, 5);
+// insertBT(myTree, 6);
+// insertBT(myTree, 7);
+// insertBT(myTree, 8);
+// insertBT(myTree, 9);
+// insertBT(myTree, 10);
+// insertBT(myTree, 5);
+// insertBT(myTree, 6);
+// insertBT(myTree, 7);
+// insertBT(myTree, 8);
+// insertBT(myTree, 9);
+// insertBT(myTree, 10);
+
+// preOrder(myTree);
+// console.log("*")
+// inOrder(myTree);
+// console.log("*")
+// postOrder(myTree);
+
+var height = heightTree(myTree)
+console.log(height)
 

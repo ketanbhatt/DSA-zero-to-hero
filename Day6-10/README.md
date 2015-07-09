@@ -1,4 +1,4 @@
-## Day 6-8 Trees: 
+## Day 6-10 Binary Trees: 
 * [HackerRank - Trees](https://www.hackerrank.com/domains/data-structures/trees)
 * [GeeksforGeeks - Binary Trees](http://www.geeksforgeeks.org/data-structures/#BinaryTree)
 
@@ -35,8 +35,6 @@
 * Check if a binary tree is subtree of another binary tree
 * Determine if two binary trees are Identical
 
-### Further in Series:
-* Binary Search Tree
-* AVL Tree (Self Balancing Tree)
 
+PS: Just don't solve traversal, height, size etc questions recursively, solve them iteratively too if possible.
 
