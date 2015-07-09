@@ -113,6 +113,24 @@ class BinaryTree:
 			self.__levelOrder(node.left,height-1)
 			self.__levelOrder(node.right,height-1)
 
+	# reverse levelorder traversal of the binary tree
+	# time complexity: O(n)
+	# space complexity: O(1)
+	def levelOrderR(self,node):
+		for i in range(self.height(node),-1,-1):
+			#print ""    #uncomment to print different levels in different lines
+			self.__levelOrderR(node,i)
+			print " ",
+			
+	def __levelOrderR(self,node,height):
+		if not node:
+			return
+		if height==0:
+			print node,
+		else:
+			self.__levelOrderR(node.left,height-1)
+			self.__levelOrderR(node.right,height-1)
+
 	# verticalorder traversal of the binary tree
 	# time complexity: O(n) hash map operations time complexity: O(1)
 	# space complexity: O(n)
@@ -138,27 +156,31 @@ class BinaryTree:
 
 
 	# topview of the binary tree
-	# time complexity: O(n) hash map operations time complexity: O(1)
+	# time complexity: O(n) hash map,queue operations time complexity: O(1)
 	# space complexity: O(n)
 	def topView(self,node):
 		minhd = 0
 		maxhd = 0
+		myhash = {}
 		myqueue = [[node,0]]
-		print node,
+		myhash[0] = node
 		while myqueue:
 			node,hd = myqueue.pop(0)
 			
 			if node:
 				if hd<minhd:
-					print node,
+					myhash[hd] = node
 					minhd = hd
 				elif hd>maxhd:
-					print node,
+					myhash[hd] = node
 					maxhd = hd
 				myqueue.append([node.left,hd-1])
 				myqueue.append([node.right,hd+1])
-
-
+		hdmin = min(myhash.keys())
+		hdmax = max(myhash.keys())
+		for hd in range(hdmin,hdmax+1):
+			print myhash[hd],
+			
 	# leftview of the binary tree
 	# time complexity: O(n)
 	# space complexity: O(Log(n))
@@ -396,6 +418,57 @@ class BinaryTree:
 	def findClosest(self,node,data):
 		pass
 
+	# check if the binary tree is height balanced
+	# time complexity: O(n)
+	# space complexity: O(1)
+	def balanced(self,node):
+		return self.__balanced(node)[0]
+
+	def __balanced(self,node):
+		if not node:
+			return True,0
+
+		lbal,lh = self.__balanced(node.left)
+		rbal,rh = self.__balanced(node.right)
+
+		h = 1 + max(lh,rh)
+		bal = True if abs(lh - rh) == 1 else False
+		return bal,h
+
+	def mirror(self,node):
+		if not node:
+			return
+		self.mirror(node.left)
+		self.mirror(node.right)
+		node.left , node.right = node.right , node.left
+
+# check if two binary trees are identical
+# time complexity: O(n)
+# space complexity: O(1)
+def isIdentical(node,node2):
+	if not node and not node2:
+		return True
+	elif not node or not node2:
+		return False
+	else:
+		return node.data == node2.data and isIdentical(node.left,node2.left) and isIdentical(node.right,node2.right)
+
+# check if a binary tree is a sub tree of another   
+# time complexity: O(n^2)
+# space complexity: O(1)
+def isSubtree(node,node2):	#if node2 tree is subtree of node treee
+	if not node2:
+		return True
+	if not node:
+		return False
+
+	if isIdentical(node,node2):
+		return True
+	return isSubtree(node.left,node2) or isSubtree(node.right,node2)
+
+
+
+
 myTree = BinaryTree()
 
 for i in range(9):
@@ -407,7 +480,6 @@ for i in range(9):
 # myTree.root.left.right = myTree.Node(16)
 # myTree.root.left.right.right = myTree.Node(50)
 # myTree.root.left.right.right.right = myTree.Node(52)
-
 
 
 print "Binary Tree"
@@ -428,16 +500,30 @@ print "Postorder Traversal:  	 ",
 myTree.postOrder(myTree.root)
 print
 
-print "Level Order Traversal: 	 ",
+print "Level Order Traversal:   ",
 myTree.levelOrder(myTree.root)
+print
+
+print "Reverse Level Order:   ",
+myTree.levelOrderR(myTree.root)
 print
 
 print "Spiral Traversal:        ",
 myTree.spiral(myTree.root)
 print
 
+myTree.mirror(myTree.root)
+print "Mirror Level Order:      ",
+myTree.levelOrder(myTree.root)
+print
+myTree.mirror(myTree.root)
+
 print "Vertical Order Traversal:",
 myTree.verticalOrder(myTree.root)
+print
+
+print "Boundary Traversal:      ",
+myTree.boundary(myTree.root)
 print
 
 print "Top View:   ",
@@ -456,7 +542,7 @@ print "Bottom View:",
 myTree.bottomView(myTree.root)
 print ""
 
-print "Leaves: ",
+print "Leaves:     ",
 leaf = myTree.leaves(myTree.root)
 print
 print "No. of Leaf Nodes: ",leaf
@@ -464,11 +550,8 @@ print "No. of Leaf Nodes: ",leaf
 print "Root to Leaf Paths: "
 myTree.paths(myTree.root,[])
 
-print "Boundary Traversal: ",
-myTree.boundary(myTree.root)
-print
-
 print "Level Leaf:  ",myTree.levelLeaf(myTree.root)
+print "Balanced:    ",myTree.balanced(myTree.root)
 
 print "Min Element: ",myTree.minNode(myTree.root)
 print "Max Element: ",myTree.maxNode(myTree.root)
@@ -476,4 +559,5 @@ print "Max Element: ",myTree.maxNode(myTree.root)
 print "Diameter:    ",myTree.diameter(myTree.root)
 
 print "Max Width:   ",myTree.width(myTree.root)
+
 
