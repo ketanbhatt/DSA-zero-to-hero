@@ -1,4 +1,4 @@
-## Day 2-3 Sorting Array
+## Day 02-03 Sorting Array
 1. Selection Sort
 2. Bubble Sort
 3. Insertion Sort

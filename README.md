@@ -1,10 +1,10 @@
 # DSA-zero-to-hero
 
 ### Index
-1. [Day 1: Fibonacci](Day1/)
-2. [Day 2-3: Sorting Array](Day2-3/)
-3. [Day 4-6: Linked Lists](Day4-6/)
-4. [Day 6-10: Trees](Day6-10/)
+1. [Day 01: Fibonacci](Day01/)
+2. [Day 02-03: Sorting Array](Day02-03/)
+3. [Day 04-06: Linked Lists](Day04-06/)
+4. [Day 06-10: Binary Trees](Day06-10/)
 5. [Day 11: Binary Search Trees](Day11/)
 
 
@@ -14,7 +14,7 @@
 3. Heaps
 4. Dynamic Programming
 5. Greedy Programming
-6. Trackbacking
+6. Backtracking
 
 ### Contributors
 * Noob Javascript - [Ketan Bhatt](https://github.com/ketanbhatt)

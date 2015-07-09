@@ -1,4 +1,4 @@
-## Day 1 Fibonacci
+## Day 01 Fibonacci
 1. Fibonacci Series Iterative
 2. Fibonacci Series Recursive
 3. Fibonacci Series Recursive with Memoization
