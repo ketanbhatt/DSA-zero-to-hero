@@ -1,7 +1,7 @@
 '''
 
 Name:    Linked List                                
-Purpose: Various operations on singly linked list                                       
+Purpose: Various operations on a singly linked list                                       
 Created by: TigerApps                                 
 
 '''

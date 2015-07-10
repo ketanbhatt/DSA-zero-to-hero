@@ -33,15 +33,22 @@
 
 ### Todo:
 
+* [Check whether a given Binary Tree is Complete](http://www.geeksforgeeks.org/check-if-a-given-binary-tree-is-complete-tree-or-not/)
+* [Check if a given Binary Tree is SumTree](http://www.geeksforgeeks.org/check-if-a-given-binary-tree-is-sumtree/)
+
 * Find the closest leaf in a binary tree from the given node and the distance
 * Find inorder successor for all nodes
-
+* [Construct a binary tree from two traversal sequences](http://www.geeksforgeeks.org/if-you-are-given-two-traversal-sequences-can-you-construct-the-binary-tree/)
 
 PS: Don't solve traversal, view etc questions just recursively, solve them iteratively too if possible.
 
 
 ### Read About:
+* [print-postorder-from-given-inorder-and-preorder-traversals](http://www.geeksforgeeks.org/print-postorder-from-given-inorder-and-preorder-traversals/)
 * [root-to-leaf-path-sum-equal-to-a-given-number](http://www.geeksforgeeks.org/root-to-leaf-path-sum-equal-to-a-given-number/)
-
+* [print-nodes-distance-k-given-node-binary-tree](http://www.geeksforgeeks.org/print-nodes-distance-k-given-node-binary-tree/)
+* [threaded-binary-tree](http://geeksquiz.com/threaded-binary-tree/)
+* [given-linked-list-representation-of-complete-tree-convert-it-to-linked-representation](http://www.geeksforgeeks.org/given-linked-list-representation-of-complete-tree-convert-it-to-linked-representation/)
+* [segment tree](http://www.geeksforgeeks.org/segment-tree-set-1-sum-of-given-range/)
 
 

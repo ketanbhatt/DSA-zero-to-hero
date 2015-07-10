@@ -1,7 +1,7 @@
 '''
 
 Name:    Sorting Array                                      
-Purpose: Sort the given array of numbers in ascending order                                       
+Purpose: Sort the given array of objects in ascending order                                       
 Created by: TigerApps                                 
 
 '''

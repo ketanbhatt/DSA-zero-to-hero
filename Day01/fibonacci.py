@@ -1,7 +1,7 @@
 '''
 
 Name:    Fibonacci                                       
-Purpose: Print first n numbers from the Fibonacci Seqeunce                                        
+Purpose: Print first n numbers of the Fibonacci Seqeunce                                        
 Created by: TigerApps                                 
 
 '''

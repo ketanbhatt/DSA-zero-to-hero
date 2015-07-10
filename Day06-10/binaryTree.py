@@ -1,7 +1,7 @@
 '''
 
 Name:    Binary Tree                                
-Purpose: Various operations on binary tree                                      
+Purpose: Various operations on a binary tree                                      
 Created by: TigerApps                                 
 
 '''
@@ -25,7 +25,7 @@ class BinaryTree:
 		def __str__(self):
 			return str(self.data)	
 
-	# insert in balanced way
+	# insert in a complete binary tree iterative
 	# time complexity: O(logn) queue operations time complexity: O(1)
 	# space complexity: O(n)
 	def insert(self,data):
@@ -51,59 +51,142 @@ class BinaryTree:
 
 	# height of the binary tree
 	# time complexity: O(n)
-	# space complexity: O(1)
+	# space complexity: O(h)
 	def height(self,node):
 		if not node:
 			return 0
 		return 1 + max(self.height(node.left),self.height(node.right))
+	# height of the binary tree iterative
+	# time complexity: O(n)
+	# space complexity: O(w)
+	def height_i(self,node):
+		myqueue = []
+		myqueue.append([node,1])
+		maxht = 0
+		while myqueue:
+			temp = len(myqueue)
+			while temp:
+				curr,ht = myqueue.pop(0)
+				if curr:
+					maxht = max(maxht,ht)
+					myqueue.append([curr.left,ht+1])
+					myqueue.append([curr.right,ht+1])
+				temp -= 1
+		return maxht
 
 	# size of the binary tree
 	# time complexity: O(n)
-	# space complexity: O(1)
+	# space complexity: O(h)
 	def size(self,node):
 		if not node:
 			return 0
 		return self.size(node.left) + 1 + self.size(node.right)
+	# size of the binary tree iterative
+	# time complexity: O(n)
+	# space complexity: O(w)
+	def size_i(self,node):
+		myqueue = []
+		myqueue.append(node)
+		sz = 0
+		while myqueue:
+			temp = len(myqueue)
+			while temp:
+				curr = myqueue.pop(0)
+				if curr:
+					sz += 1
+					myqueue.append(curr.left)
+					myqueue.append(curr.right)
+				temp -= 1
+		return sz
+
 
 	# preorder traversal of the binary tree
 	# time complexity: O(n)
-	# space complexity: O(1)
+	# space complexity: O(h)
 	def preOrder(self,node):
 		if not node:
 			return
 		print node,
 		self.preOrder(node.left)
 		self.preOrder(node.right)
+	# preorder traversal of the binary tree iterative
+	# time complexity: O(n)
+	# space complexity: O(n+w)
+	def preOrder_i(self,node):
+		mystack = []
+		mystack.append(node)
+		pre = []
+		while mystack:
+			curr = mystack.pop()
+			if curr:
+				pre.append(curr)
+				mystack.append(curr.right)
+				mystack.append(curr.left)
+		return pre
+
 	
 	# inorder traversal of the binary tree
 	# time complexity: O(n)
-	# space complexity: O(1)
+	# space complexity: O(h)
 	def inOrder(self,node):
 		if not node:
 			return
 		self.inOrder(node.left)
 		print node,
 		self.inOrder(node.right)
+	# inorder traversal of the binary tree iterative
+	# time complexity: O(n)
+	# space complexity: O(n+w)
+	def inOrder_i(self,node):
+		curr = node
+		mystack = []
+		mystack.append(curr)
+		inO = []
+		while mystack:
+			while curr.left:
+				mystack.append(curr.left)
+				curr = curr.left
+			while not curr.right and mystack:
+				curr = mystack.pop()
+				inO.append(curr)
+			if curr.right:
+				curr = curr.right
+				mystack.append(curr)
+		return inO
+
 
 	# postorder traversal of the binary tree
 	# time complexity: O(n)
-	# space complexity: O(1)
+	# space complexity: O(h)
 	def postOrder(self,node):
 		if not node:
 			return
 		self.postOrder(node.left)
 		self.postOrder(node.right)
 		print node,
+	# postorder traversal of the binary tree iterative
+	# time complexity: O(n)
+	# space complexity: O(n+w)
+	def postOrder_i(self,node):
+		mystack = []
+		mystack.append(node)
+		post = []
+		while mystack:
+			curr = mystack.pop()
+			if curr:
+				post.append(curr)
+				mystack.append(curr.left)
+				mystack.append(curr.right)
+		return post[::-1]
 
 	# levelorder traversal of the binary tree
 	# time complexity: O(n)
-	# space complexity: O(1)
+	# space complexity: O(h)
 	def levelOrder(self,node):
 		for i in range(self.height(node)):
 			#print ""    #uncomment to print different levels in different lines
 			self.__levelOrder(node,i)
 			print " ",
-			
 	def __levelOrder(self,node,height):
 		if not node:
 			return
@@ -112,16 +195,33 @@ class BinaryTree:
 		else:
 			self.__levelOrder(node.left,height-1)
 			self.__levelOrder(node.right,height-1)
+	# levelorder traversal of the binary tree iterative
+	# time complexity: O(n)
+	# space complexity: O(n+w)
+	def levelOrder_i(self,node):
+		myqueue = []
+		myqueue.append(node)
+		level = []
+		while myqueue:
+			temp = len(myqueue)
+			while temp:
+				curr = myqueue.pop(0)
+				if curr:
+					level.append(curr)
+					myqueue.append(curr.left)
+					myqueue.append(curr.right)
+				temp -= 1
+			level.append(" ")
+		return level
 
 	# reverse levelorder traversal of the binary tree
 	# time complexity: O(n)
-	# space complexity: O(1)
+	# space complexity: O(h)
 	def levelOrderR(self,node):
 		for i in range(self.height(node),-1,-1):
 			#print ""    #uncomment to print different levels in different lines
 			self.__levelOrderR(node,i)
 			print " ",
-			
 	def __levelOrderR(self,node,height):
 		if not node:
 			return
@@ -130,32 +230,141 @@ class BinaryTree:
 		else:
 			self.__levelOrderR(node.left,height-1)
 			self.__levelOrderR(node.right,height-1)
+	# reverse levelorder traversal of the binary tree iterative
+	# time complexity: O(n)
+	# space complexity: O(n+w)
+	def levelOrderR_i(self,node):
+		myqueue = []
+		myqueue.append(node)
+		level = []
+		while myqueue:
+			temp = len(myqueue)
+			while temp:
+				curr = myqueue.pop(0)
+				if curr:
+					level.append(curr)
+					myqueue.append(curr.right)
+					myqueue.append(curr.left)
+				temp -= 1
+			level.append(" ")
+		while level[-1]==" ":
+			level = level[:-1]
+		level.append(" ")
+		return level[::-1]
+
+	# levelorder traversal in spiral way of the binary tree
+	# time complexity: O(n)
+	# space complexity: O(h)
+	def spiral(self,node):
+		right = False
+		for i in range(self.height(node)):
+			#print ""    #uncomment to print different levels in different lines
+			self.__spiral(node,i,right)
+			right = not right	
+			print " ",
+	def __spiral(self,node,height,right):
+		if not node:
+			return
+		if height==0:
+			print node,
+		else:
+			if right:
+				self.__spiral(node.left,height-1,right)
+				self.__spiral(node.right,height-1,right)
+			else:
+				self.__spiral(node.right,height-1,right)
+				self.__spiral(node.left,height-1,right)
+	# levelorder traversal in spiral way of the binary tree iterative
+	# time complexity: O(n)
+	# space complexity: O(n+w)
+	def spiral_i(self,node):
+		myqueue = []
+		myqueue.append(node)
+		spiral = []
+		right = False
+		while myqueue:
+			temp = len(myqueue)
+			if right:
+				spiral.extend(myqueue[:])
+			else:
+				spiral.extend(myqueue[::-1])
+			right = not right
+			while temp:
+				curr = myqueue.pop(0)
+				if curr.left:
+					myqueue.append(curr.left)
+				if curr.right:
+					myqueue.append(curr.right)
+				temp -= 1
+			spiral.append(" ")
+		return spiral
 
 	# verticalorder traversal of the binary tree
 	# time complexity: O(n) hash map operations time complexity: O(1)
-	# space complexity: O(n)
+	# space complexity: O(n+h)
 	def verticalOrder(self,node):
 		myhash = {}
 		self.__verticalOrder(self.root,myhash,0)
-		hdmin = min(myhash.keys())
-		hdmax = max(myhash.keys())
-		for hd in range(hdmin,hdmax+1):
+		for hd in sorted(myhash.keys()):
 			for node in range(len(myhash[hd])):
 				print myhash[hd][node],
-			print "",
-
+			print " ",
 	def __verticalOrder(self,node,myhash,hd):
 		if not node:
 			return
-		self.__verticalOrder(node.left,myhash,hd-1)
 		try:
 			myhash[hd].append(node)
 		except:
 			myhash[hd] = [node]
+		self.__verticalOrder(node.left,myhash,hd-1)
 		self.__verticalOrder(node.right,myhash,hd+1)
+	# verticalorder traversal of the binary tree iterative
+	# time complexity: O(n) hash map operations time complexity: O(1)
+	# space complexity: O(n+w)
+	def verticalOrder_i(self,node):
+		myhash = {}
+		myqueue = []
+		myqueue.append([node,0])
+		while myqueue:
+			temp = len(myqueue)
+			while temp:
+				curr,hd = myqueue.pop(0)
+				if curr:
+					if hd in myhash.keys():
+						myhash[hd].append(curr)
+					else:
+						myhash[hd] = [curr]
+					myqueue.append([curr.left,hd-1])
+					myqueue.append([curr.right,hd+1])
+				temp -= 1
+		vertical = []
+		for hd in sorted(myhash.keys()):
+			for node in range(len(myhash[hd])):
+				vertical.append(myhash[hd][node])
+			vertical.append(" ")
+		return vertical
+	
+	# boundary of the binary tree iterative
+	# time complexity: O(n)
+	# space complexity: O(n)
+	def boundary(self,node):
+		if not node:
+			return
+		curr = node
+		while curr.left and curr.left:
+			print curr,
+			curr=curr.left
+		self.leaves(self.root)
+		stack = []
+		curr = node.right
+		while curr.right:
+			stack.append(curr)
+			curr=curr.right
+		while stack:
+			curr = stack.pop()
+			print curr,
 
-
-	# topview of the binary tree
+	# topview of the binary tree iterative
 	# time complexity: O(n) hash map,queue operations time complexity: O(1)
 	# space complexity: O(n)
 	def topView(self,node):
@@ -176,9 +385,7 @@ class BinaryTree:
 					maxhd = hd
 				myqueue.append([node.left,hd-1])
 				myqueue.append([node.right,hd+1])
-		hdmin = min(myhash.keys())
-		hdmax = max(myhash.keys())
-		for hd in range(hdmin,hdmax+1):
+		for hd in sorted(myhash.keys()):
 			print myhash[hd],
 			
 	# leftview of the binary tree
@@ -189,7 +396,6 @@ class BinaryTree:
 		for i in range(self.height(self.root)):
 			levelvisited.append(0)
 		self.__leftView(node,0,levelvisited)
-
 	def __leftView(self,node,level,levelvisited):
 		if not node:
 			return
@@ -207,7 +413,6 @@ class BinaryTree:
 		for i in range(self.height(self.root)):
 			levelvisited.append(0)
 		self.__rightView(node,0,levelvisited)
-
 	def __rightView(self,node,level,levelvisited):
 		if not node:
 			return
@@ -217,7 +422,7 @@ class BinaryTree:
 		self.__rightView(node.right,level+1,levelvisited)
 		self.__rightView(node.left,level+1,levelvisited)
 
-	# bottomview of the binary tree
+	# bottomview of the binary tree iterative
 	# time complexity: O(n)
 	# space complexity: O(n)
 	def bottomView(self,node):
@@ -225,46 +430,17 @@ class BinaryTree:
 		myhash = {}
 		while myqueue:
 			node,hd = myqueue.pop(0)
-			
 			if node:
 				myhash[hd] = node
 				myqueue.append([node.left,hd-1])
 				myqueue.append([node.right,hd+1])
-				
-		minhd = min(myhash.keys())
-		maxhd = max(myhash.keys())
-		for key in range(minhd,maxhd+1):
-			print myhash[key],	
-
-	
-	# levelorder traversal in spiral way of the binary tree
-	# time complexity: O(n)
-	# space complexity: O(1)
-	def spiral(self,node):
-		right = False
-		for i in range(self.height(node)):
-			#print ""    #uncomment to print different levels in different lines
-			self.__spiral(node,i,right)
-			right = not right	
-			print " ",
-			
-	def __spiral(self,node,height,right):
-		if not node:
-			return
-		if height==0:
-			print node,
-		else:
-			if right:
-				self.__spiral(node.left,height-1,right)
-				self.__spiral(node.right,height-1,right)
-			else:
-				self.__spiral(node.right,height-1,right)
-				self.__spiral(node.left,height-1,right)
-
+		for hd in sorted(myhash.keys()):
+			print myhash[hd],
+		
 
 	# all leaf nodes of the binary tree
 	# time complexity: O(n)
-	# space complexity: O(1)
+	# space complexity: O(h)
 	def leaves(self,node):
 		if not node:
 			return 0
@@ -272,7 +448,25 @@ class BinaryTree:
 			print node,
 			return 1
 		else:
-			return self.leaves(node.left) + self.leaves(node.right)	
+			return self.leaves(node.left) + self.leaves(node.right)
+	# all leaf nodes of the binary tree iterative
+	# time complexity: O(n)
+	# space complexity: O(n+w)
+	def leaves_i(self,node):
+		myqueue = []
+		myqueue.append(node)
+		leaves = []
+		while myqueue:
+			temp = len(myqueue)
+			while temp:
+				curr = myqueue.pop(0)
+				if curr:
+					if not curr.left and not curr.right:
+						leaves.append(curr)
+					myqueue.append(curr.left)
+					myqueue.append(curr.right)
+				temp -= 1
+		return leaves
 
 	# all root to leaf paths of the binary tree
 	# time complexity: O(n)
@@ -290,29 +484,9 @@ class BinaryTree:
 			self.paths(node.right,path)	
 		path.pop()
 
-	# boundary of the binary tree
-	# time complexity: O(n)
-	# space complexity: O(n)
-	def boundary(self,node):
-		if not node:
-			return
-		curr = node
-		while curr.left and curr.left:
-			print curr,
-			curr=curr.left
-		self.leaves(self.root)
-		stack = []
-		curr = node.right
-		while curr.right:
-			stack.append(curr)
-			curr=curr.right
-		while stack:
-			curr = stack.pop()
-			print curr,
-
 	# level of a node of the binary tree
 	# time complexity: O(n)
-	# space complexity: O(1)
+	# space complexity: O(h)
 	def level(self,node,item,level):
 		if not node:
 			return 0
@@ -323,11 +497,10 @@ class BinaryTree:
 
 	# check if all leaves are at same level
 	# time complexity: O(n)
-	# space complexity: O(1)
+	# space complexity: O(h)
 	def levelLeaf(self,node):
 		leaf = []
 		return self.__levelLeaf(node,leaf,0)
-
 	def __levelLeaf(self,node,leaf,level):
 		if not node.left and not node.right:
 			if leaf == []:
@@ -349,7 +522,7 @@ class BinaryTree:
 
 	# find min element in a binary tree
 	# time complexity: O(n)
-	# space complexity: O(1)
+	# space complexity: O(h)
 	def minNode(self,node,):
 		if not node:
 			return sys.maxint
@@ -357,7 +530,7 @@ class BinaryTree:
 	
 	# find max element in a binary tree
 	# time complexity: O(n)
-	# space complexity: O(1)
+	# space complexity: O(h)
 	def maxNode(self,node,):
 		if not node:
 			return -sys.maxint
@@ -365,12 +538,11 @@ class BinaryTree:
 
 	# find diameter of a binary tree
 	# time complexity: O(n)
-	# space complexity: O(1)
+	# space complexity: O(h)
 	def diameter(self,node):
 		dia = [0]
 		self.__diameter(node,dia)
 		return dia[0]
-	
 	def __diameter(self,node,dia):
 		if not node:
 			return 0
@@ -383,17 +555,17 @@ class BinaryTree:
 
 	# find diameter of a binary tree
 	# time complexity: O(n^2)
-	# space complexity: O(1)
+	# space complexity: O(h)
 	def diameter2(self,node):
 		if not node:
 			return 0
 		return max(self.diameter2(node.left), 1 + self.height(node.left) + \
 			self.height(node.right) ,self.diameter2(node.right))
 		
-	# find maximum width of a binary tree
+	# find maximum width of a binary tree iterative
 	# time complexity: O(n)
-	# space complexity: O(1)
-	def width(self,node,):
+	# space complexity: O(w)
+	def width(self,node):
 		if not node:
 			return 0
 		myqueue = []
@@ -412,29 +584,58 @@ class BinaryTree:
 		return maxWidth
 
 	
-	# find leaf node closest to given node
-	# time complexity: 
-	# space complexity:
-	def findClosest(self,node,data):
-		pass
-
 	# check if the binary tree is height balanced
 	# time complexity: O(n)
-	# space complexity: O(1)
-	def balanced(self,node):
-		return self.__balanced(node)[0]
-
-	def __balanced(self,node):
+	# space complexity: O(h)
+	def isBalanced(self,node):
+		return self.__isBalanced(node)[0]
+	def __isBalanced(self,node):
 		if not node:
 			return True,0
-
-		lbal,lh = self.__balanced(node.left)
-		rbal,rh = self.__balanced(node.right)
-
+		lbal,lh = self.__isBalanced(node.left)
+		rbal,rh = self.__isBalanced(node.right)
 		h = 1 + max(lh,rh)
-		bal = True if abs(lh - rh) == 1 else False
+		bal = True if abs(lh - rh) < 2 else False
 		return bal,h
 
+	# check if the binary tree is complete
+	# time complexity: O(n)
+	# space complexity: O(w)
+	def isComplete(self,node):
+		myqueue = []
+		myqueue.append(node)
+		foundNone = False
+		while myqueue:
+			temp = len(myqueue)
+			while temp:
+				curr = myqueue.pop(0)
+				if curr:
+					if foundNone:
+						return False
+					myqueue.append(curr.left)
+					myqueue.append(curr.right)
+				else:
+					foundNone = True
+				temp -= 1
+		return True
+
+	# check if the binary tree is a sum tree
+	# time complexity: O(n)
+	# space complexity: O(h)
+	def isSumTree(self,node):
+		if not node or not node.left and not node.right:
+			return True
+		ls = self.__Sum(node.left)
+		rs = self.__Sum(node.right)
+		return self.isSumTree(node.left) and node.data == ls + rs and self.isSumTree(node.right) 
+	def __Sum(self,node):
+		if not node: 
+			return 0
+		return self.__Sum(node.left) + node.data + self.__Sum(node.right)
+
+	# convert a binary tree to its mirror tree
+	# time complexity: O(n)
+	# space complexity: O(h)
 	def mirror(self,node):
 		if not node:
 			return
@@ -444,7 +645,7 @@ class BinaryTree:
 
 # check if two binary trees are identical
 # time complexity: O(n)
-# space complexity: O(1)
+# space complexity: O(h)
 def isIdentical(node,node2):
 	if not node and not node2:
 		return True
@@ -455,7 +656,7 @@ def isIdentical(node,node2):
 
 # check if a binary tree is a sub tree of another   
 # time complexity: O(n^2)
-# space complexity: O(1)
+# space complexity: O(h)
 def isSubtree(node,node2):	#if node2 tree is subtree of node treee
 	if not node2:
 		return True
@@ -467,64 +668,77 @@ def isSubtree(node,node2):	#if node2 tree is subtree of node treee
 	return isSubtree(node.left,node2) or isSubtree(node.right,node2)
 
 
+# to print a list of nodes
+# time complexity: O(n)
+# space complexity: O(1)
+def myprint(list):
+	for node in list:
+		print node,
+	print
 
 
 myTree = BinaryTree()
 
-for i in range(9):
+for i in range(7):
 	myTree.insert(i) 
-
-
-# myTree.root.left.left = myTree.Node(5)
-# myTree.root.left.left.left = myTree.Node(15)
-# myTree.root.left.right = myTree.Node(16)
-# myTree.root.left.right.right = myTree.Node(50)
-# myTree.root.left.right.right.right = myTree.Node(52)
 
 
 print "Binary Tree"
 
 print "Height:    ",myTree.height(myTree.root)
+print "Height:    ",myTree.height_i(myTree.root)
 
 print "Size:      ",myTree.size(myTree.root)
+print "Size:      ",myTree.size_i(myTree.root)
 	
+
+# print "Preorder Traversal:   	 ",
+# myTree.preOrder(myTree.root)
+#print
 print "Preorder Traversal:   	 ",
-myTree.preOrder(myTree.root)
-print
+myprint(myTree.preOrder_i(myTree.root))
 
-print "Inorder Traversal:    	 ",
-myTree.inOrder(myTree.root)
-print
+# print "Inorder Traversal:    	 ",
+# myTree.inOrder(myTree.root)
+# print
+print "Inorder Traversal:   	 ",
+myprint(myTree.inOrder_i(myTree.root))
 
-print "Postorder Traversal:  	 ",
-myTree.postOrder(myTree.root)
-print
+# print "Postorder Traversal:  	 ",
+# myTree.postOrder(myTree.root)
+# print
+print "Postorder Traversal:   	 ",
+myprint(myTree.postOrder_i(myTree.root))
 
+
+# print "Level Order Traversal:   ",
+# myTree.levelOrder(myTree.root)
+# print
 print "Level Order Traversal:   ",
-myTree.levelOrder(myTree.root)
-print
+myprint(myTree.levelOrder_i(myTree.root))
 
+# print "Reverse Level Order:   ",
+# myTree.levelOrderR(myTree.root)
+# print
 print "Reverse Level Order:   ",
-myTree.levelOrderR(myTree.root)
-print
+myprint(myTree.levelOrderR_i(myTree.root))
 
+# print "Spiral Traversal:        ",
+# myTree.spiral(myTree.root)
+# print
 print "Spiral Traversal:        ",
-myTree.spiral(myTree.root)
-print
+myprint(myTree.spiral_i(myTree.root))
 
-myTree.mirror(myTree.root)
-print "Mirror Level Order:      ",
-myTree.levelOrder(myTree.root)
-print
-myTree.mirror(myTree.root)
-
+# print "Vertical Order Traversal:",
+# myTree.verticalOrder(myTree.root)
+# print
 print "Vertical Order Traversal:",
-myTree.verticalOrder(myTree.root)
-print
+myprint(myTree.verticalOrder_i(myTree.root))
 
 print "Boundary Traversal:      ",
 myTree.boundary(myTree.root)
 print
+
 
 print "Top View:   ",
 myTree.topView(myTree.root)
@@ -542,16 +756,24 @@ print "Bottom View:",
 myTree.bottomView(myTree.root)
 print ""
 
+
+# print "Leaves:     ",
+# leaf = myTree.leaves(myTree.root)
+# print
+# print "No. of Leaf Nodes: ",leaf
+leaves = myTree.leaves_i(myTree.root)
+print "No. of Leaf Nodes:",len(leaves)
 print "Leaves:     ",
-leaf = myTree.leaves(myTree.root)
-print
-print "No. of Leaf Nodes: ",leaf
+myprint(leaves)
+
 
 print "Root to Leaf Paths: "
 myTree.paths(myTree.root,[])
 
 print "Level Leaf:  ",myTree.levelLeaf(myTree.root)
-print "Balanced:    ",myTree.balanced(myTree.root)
+print "Balanced:    ",myTree.isBalanced(myTree.root)
+print "Complete:    ",myTree.isComplete(myTree.root)
+print "Sum Tree:    ",myTree.isSumTree(myTree.root)
 
 print "Min Element: ",myTree.minNode(myTree.root)
 print "Max Element: ",myTree.maxNode(myTree.root)
@@ -560,4 +782,9 @@ print "Diameter:    ",myTree.diameter(myTree.root)
 
 print "Max Width:   ",myTree.width(myTree.root)
 
+myTree.mirror(myTree.root)
+print "Mirror Level Order:      ",
+myTree.levelOrder(myTree.root)
+print
+myTree.mirror(myTree.root)
 
