@@ -7,6 +7,8 @@
 4. [Day 06-10: Binary Trees](Day06-10/)
 5. [Day 11: Binary Search Trees](Day11/)
 
+### Read
+[Find a triplet that sum to a given value](http://www.geeksforgeeks.org/find-a-triplet-that-sum-to-a-given-value/)
 
 ### Coming up next
 1. AVL Trees
