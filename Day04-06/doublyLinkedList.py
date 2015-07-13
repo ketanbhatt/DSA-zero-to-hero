@@ -1,6 +1,6 @@
 '''
 
-Name:    Linked List                                
+Name:    Doubly Linked List                                
 Purpose: Various operations on a doubly linked list                                       
 Created by: TigerApps                                 
 

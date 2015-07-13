@@ -10,7 +10,7 @@ import random
 import sys
 	
 
-# LinkedList object
+# BinaryTree object
 class BinaryTree:
 	def __init__(self):
 		self.root = None
@@ -138,6 +138,8 @@ class BinaryTree:
 	# time complexity: O(n)
 	# space complexity: O(n+w)
 	def inOrder_i(self,node):
+		if not node:
+			return []
 		curr = node
 		mystack = []
 		mystack.append(curr)
@@ -146,6 +148,8 @@ class BinaryTree:
 			while curr.left:
 				mystack.append(curr.left)
 				curr = curr.left
+			curr = mystack.pop()
+			inO.append(curr)
 			while not curr.right and mystack:
 				curr = mystack.pop()
 				inO.append(curr)
@@ -247,8 +251,11 @@ class BinaryTree:
 					myqueue.append(curr.left)
 				temp -= 1
 			level.append(" ")
-		while level[-1]==" ":
-			level = level[:-1]
+		try:
+			while level[-1]==" ":
+				level = level[:-1]
+		except:
+			pass
 		level.append(" ")
 		return level[::-1]
 
@@ -278,6 +285,8 @@ class BinaryTree:
 	# time complexity: O(n)
 	# space complexity: O(n+w)
 	def spiral_i(self,node):
+		if not node:
+			return []
 		myqueue = []
 		myqueue.append(node)
 		spiral = []
@@ -351,13 +360,13 @@ class BinaryTree:
 		if not node:
 			return
 		curr = node
-		while curr.left and curr.left:
+		while curr and curr.left:
 			print curr,
 			curr=curr.left
 		self.leaves(self.root)
 		stack = []
 		curr = node.right
-		while curr.right:
+		while curr and curr.right:
 			stack.append(curr)
 			curr=curr.right
 		while stack:
@@ -368,6 +377,8 @@ class BinaryTree:
 	# time complexity: O(n) hash map,queue operations time complexity: O(1)
 	# space complexity: O(n)
 	def topView(self,node):
+		if not node:
+			return []
 		minhd = 0
 		maxhd = 0
 		myhash = {}
@@ -499,6 +510,8 @@ class BinaryTree:
 	# time complexity: O(n)
 	# space complexity: O(h)
 	def levelLeaf(self,node):
+		if not node:
+			return True
 		leaf = []
 		return self.__levelLeaf(node,leaf,0)
 	def __levelLeaf(self,node,leaf,level):
@@ -523,7 +536,7 @@ class BinaryTree:
 	# find min element in a binary tree
 	# time complexity: O(n)
 	# space complexity: O(h)
-	def minNode(self,node,):
+	def minNode(self,node):
 		if not node:
 			return sys.maxint
 		return min(self.minNode(node.left),node.data,self.minNode(node.right))
@@ -531,7 +544,7 @@ class BinaryTree:
 	# find max element in a binary tree
 	# time complexity: O(n)
 	# space complexity: O(h)
-	def maxNode(self,node,):
+	def maxNode(self,node):
 		if not node:
 			return -sys.maxint
 		return max(self.maxNode(node.left),node.data,self.maxNode(node.right))
@@ -677,11 +690,12 @@ def myprint(list):
 	print
 
 
+# generate a binary tree of random elements and print
 myTree = BinaryTree()
 
-for i in range(7):
-	myTree.insert(i) 
-
+for i in range(15):
+	temp = random.randint(0,99)
+ 	myTree.insert(temp) 
 
 print "Binary Tree"
 
@@ -783,7 +797,7 @@ print "Diameter:    ",myTree.diameter(myTree.root)
 print "Max Width:   ",myTree.width(myTree.root)
 
 myTree.mirror(myTree.root)
-print "Mirror Level Order:      ",
+print "Mirror Level Order: ",
 myTree.levelOrder(myTree.root)
 print
 myTree.mirror(myTree.root)

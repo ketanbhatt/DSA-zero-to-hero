@@ -5,7 +5,7 @@
 2. [Day 02-03: Sorting Array](Day02-03/)
 3. [Day 04-06: Linked Lists](Day04-06/)
 4. [Day 06-10: Binary Trees](Day06-10/)
-5. [Day 11: Binary Search Trees](Day11/)
+5. [Day 13: Binary Search Trees](Day13/)
 
 ### Read
 [Find a triplet that sum to a given value](http://www.geeksforgeeks.org/find-a-triplet-that-sum-to-a-given-value/)

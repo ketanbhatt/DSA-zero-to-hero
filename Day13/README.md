@@ -1,14 +1,13 @@
-## Day 11 Binary Search Trees: 
-
+## Day 13 Binary Search Trees: 
 
 
 ### To Do:
 
 1. Search and Insert in BST
 2. Deletion from BST
-3. Minimum value in a Binary Search Tree
+3. Min and max value in a Binary Search Tree
 4. [Inorder predecessor and successor for a given key in BST](http://www.geeksforgeeks.org/inorder-predecessor-successor-given-key-bst/)
-5. Check if a binary tree is BST or not
+5. [Check if a binary tree is BST or not](http://www.geeksforgeeks.org/a-program-to-check-if-a-binary-tree-is-bst-or-not/)
 6. Lowest Common Ancestor in a Binary Search Tree.
 7. Find k-th smallest/largest element in BST (Order Statistics in BST)
 8. Floor and Ceil from a BST
