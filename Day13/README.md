@@ -1,7 +1,7 @@
 ## Day 13 Binary Search Trees: 
 
 
-### To Do:
+### Solved:
 
 1. Search and Insert in BST
 2. Deletion from BST
@@ -14,7 +14,7 @@
 9. Construct BST from given preorder traversal
 
 
-### Further Ahead:
+### To Do:
 * Sorted Array to Balanced BST
 * Sorted Linked List to Balanced BST
 * In-place conversion of Sorted DLL to Balanced BST

@@ -6,6 +6,8 @@
 3. [Day 04-06: Linked Lists](Day04-06/)
 4. [Day 06-10: Binary Trees](Day06-10/)
 5. [Day 13: Binary Search Trees](Day13/)
+6. [Day 16: Advanced Trees](Day16/) 
+
 
 ### Read
 [Find a triplet that sum to a given value](http://www.geeksforgeeks.org/find-a-triplet-that-sum-to-a-given-value/)
