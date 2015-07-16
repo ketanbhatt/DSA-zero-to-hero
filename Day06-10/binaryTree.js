@@ -214,6 +214,93 @@ var bottomViewPrint = function(hash) {
 	}
 }
 
+var boundaryLeaveView = function(t){
+	if(t) {
+		boundaryLeaveView(t.left);
+		if(!t.left && !t.right) {
+			console.log(t.data)
+		}
+		boundaryLeaveView(t.right);
+	}
+}
+var boundaryLeftView = function(t) {
+	if(!t)
+		return;
+
+	if(t.left){
+		console.log(t.data)
+		boundaryLeftView(t.left)
+	} else if(t.right) {
+		console.log(t.data)
+		boundaryLeftView(t.right)
+	}
+}
+var boundaryRightView = function(t) {
+	if(!t)
+		return;
+
+	if(t.right){
+		boundaryRightView(t.right)
+		console.log(t.data)
+	} else if(t.left) {
+		boundaryRightView(t.left)
+		console.log(t.data)
+	}
+}
+var boundaryView = function(t) {
+	if(!t)
+		return;
+
+	console.log(t.data);
+	boundaryLeftView(t.left);
+	boundaryLeaveView(t.left);
+	boundaryLeaveView(t.right);
+	boundaryRightView(t.right);
+}
+
+var nodeLevel = function(t, node, level){
+	 if(!t)
+	 	return -1
+
+	 if(t.data == node)
+	 	return level
+
+	 var levelLeft = nodeLevel(t.left, node, level + 1)
+	 var levelRight = nodeLevel(t.right, node, level + 1)
+
+	 if(levelLeft == -1)
+	 	return levelRight
+	 else
+	 	return levelLeft
+}
+
+var rootToLeaf = function(t, ar) {
+	if(!t)
+		return;
+
+	ar.push(t.data)
+	if(!t.left && !t.right) {
+		console.log(ar)
+	}
+
+	rootToLeaf(t.left, ar)
+	rootToLeaf(t.right, ar)
+	ar.pop()
+}
+
+var diameter = function(t) {
+	if(!t)
+		return 0;
+
+	var lheight = heightTree(t.left);
+	var rheight = heightTree(t.right);
+
+	var ldia = diameter(t.left)
+	var rdia = diameter(t.right)
+
+	return Math.max(lheight + rheight + 1, Math.max(ldia, rdia))
+}
+
 var mirrorTree = function(t) {
 	if(!t)
 		return;
@@ -272,10 +359,18 @@ insertBT(myTree, 10);
 // leftView(myTree, heightTree(myTree), hash);
 // topViewPrint(hash);
 
-var hash = {};
-topView(myTree, 0, hash);
-console.log(hash)
-bottomViewPrint(hash);
+// var hash = {};
+// topView(myTree, 0, hash);
+// bottomViewPrint(hash);
+
+// boundaryView(myTree);
+
+// console.log(nodeLevel(myTree, 5, 1));
+
+// var ar = [];
+// rootToLeaf(myTree, ar)
+
+console.log(diameter(myTree));
 
 // mirrorTree(myTree);
 // levelOrder(myTree);
