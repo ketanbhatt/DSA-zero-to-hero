@@ -6,19 +6,17 @@
 3. [Day 04-06: Linked Lists](Day04-06/)
 4. [Day 06-10: Binary Trees](Day06-10/)
 5. [Day 13: Binary Search Trees](Day13/)
-6. [Day 16: Advanced Trees](Day16/) 
+6. [Day 16: Advanced Data Structures](Day16/) 
+7. [Day 17-18: Backtracking](Day17-18/) 
 
 
 ### Read
 [Find a triplet that sum to a given value](http://www.geeksforgeeks.org/find-a-triplet-that-sum-to-a-given-value/)
 
 ### Coming up next
-1. AVL Trees
-2. Stacks/Queues
-3. Heaps
-4. Dynamic Programming
-5. Greedy Programming
-6. Backtracking
+1. Dynamic Programming
+2. Greedy Programming
+3. Other Stuff
 
 ### Contributors
 * Noob Javascript - [Ketan Bhatt](https://github.com/ketanbhatt)
