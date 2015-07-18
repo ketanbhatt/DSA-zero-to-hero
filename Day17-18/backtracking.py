@@ -105,7 +105,6 @@ def safeKT(x,y,sol,n):
 def solveMaze(maze):
     sol = []
     n = len(maze)
-    print n
     for i in range(n):
         sol.append([])
         for j in range(n):
@@ -156,3 +155,113 @@ def safeMaze(x,y,sol,n,maze):
 #         print sol[i]
 # else:
 #     print sol
+
+
+
+
+######################
+## n queens problem ##
+######################
+
+# time complexity = O(n!)
+def solveNQ(n):
+    sol = []
+    for i in range(n):
+        sol.append([])
+        for j in range(n):
+            sol[i].append(0)
+    
+    if not solveNQ_h(n, 0, sol ):
+        return False
+    else:
+        return sol
+    
+def solveNQ_h(n,queen_num,sol):
+    if queen_num == n:
+        return True 
+
+    for i in range(n):
+        x = i
+        if safeNQ(queen_num,x,sol,n):
+            sol[queen_num][x] = queen_num+1
+            if solveNQ_h(n,queen_num+1,sol):
+                return True
+            else:
+                sol[queen_num][x] = 0
+    return False
+
+def safeNQ(y,x,sol,n):
+    if y >= 0 and y<n and x>=0 and x<n:
+        if sol[y][x] == 0:
+            for i in range(y):
+                for j in range(n):
+                    if sol[i][j] != 0:
+                        if i==y or j==x:
+                            return False
+                        if i-j == y-x or i+j == y+x:
+                            return False
+            return True
+
+    return False
+
+# print solution for n queens problem
+
+# n = 5
+# sol = solveNQ(n)
+# if sol:
+#     for i in range(len(sol)):
+#         print sol[i]
+# else:
+#      print sol
+
+
+
+
+########################
+## subset sum problem ##
+########################
+
+# time complexity = exponential
+def solveSubsetSum(weights,target_sum):
+    weights = sorted(weights)
+    n = len(weights)
+    curr = []
+    total = 0
+    for i in range(n):
+        total += weights[i]
+        curr.append(0)
+
+    sol = []
+    if weights[0] <= target_sum and total >= target_sum:
+        solveSubsetSum_h(sol, weights, curr, n, 0, 0, 0, target_sum)
+    return sol
+
+def solveSubsetSum_h(sol, weights,curr,n,curr_size,curr_sum,ite,target_sum):
+    if target_sum == curr_sum:
+        sol.append( curr[:curr_size])
+        if ite + 1 < n and curr_sum - weights[ite] + weights[ite+1] <= target_sum:
+            solveSubsetSum_h(sol, weights, curr, n, curr_size, \
+                curr_sum - weights[ite], ite + 1, target_sum)
+        return
+    
+    else:
+        if ite < n and curr_sum + weights[ite] <= target_sum:
+            for i in range(ite,n):
+                curr[curr_size] = weights[i]
+                if curr_sum + weights[i] <= target_sum :
+                    solveSubsetSum_h(sol, weights, curr, n, \
+                        curr_size + 1, curr_sum + weights[i], i + 1, target_sum)
+
+
+# print solution for subset sum problem
+
+# weights = [ 10, 7, 5, 18, 12, 20, 15 ]
+# Sum = 35
+
+# sol = solveSubsetSum(weights,Sum)
+# for i in range(len(sol)):
+#     print sol[i]
+
+
+
+
