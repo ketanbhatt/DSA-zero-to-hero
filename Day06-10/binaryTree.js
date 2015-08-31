@@ -312,6 +312,20 @@ var mirrorTree = function(t) {
 	t.right = temp;
 }
 
+var isComplete = function(t, level) {
+	if(!t)
+		return true;
+	if(!t.left && !t.right)
+		return true;
+	else if(!t.left && t.right)
+		return false;
+
+	var Cleft = isComplete(t.left, level + 1)
+	var Cright = isComplete(t.right, level + 1)
+
+	return Cleft && Cright;
+}
+
 var myTree = new BinaryTree(1);
 insertBT(myTree, 2);
 insertBT(myTree, 3);
@@ -370,7 +384,9 @@ insertBT(myTree, 10);
 // var ar = [];
 // rootToLeaf(myTree, ar)
 
-console.log(diameter(myTree));
+// console.log(diameter(myTree));
+
+console.log(isComplete(myTree, 1));
 
 // mirrorTree(myTree);
 // levelOrder(myTree);
