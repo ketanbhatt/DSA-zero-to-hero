@@ -1,4 +1,4 @@
-# DSA-zero-to-hero
+# Previous Attempts :D
 
 ### Index
 1. [Day 01: Fibonacci](Day01/)
