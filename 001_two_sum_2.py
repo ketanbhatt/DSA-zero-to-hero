@@ -19,11 +19,11 @@ class Solution(object):
         :rtype: List[int]
         """
         my_dic = {}
-        for i in xrange(len(nums)):
-            num1 = my_dic.get(nums[i], -1)
+        for i, num in enumerate(nums):
+            num1 = my_dic.get(num, -1)
             if num1 > -1:
                 return [num1+1, i+1]
-            my_dic[target - nums[i]] = i
+            my_dic[target - num] = i
 
 
 nums = [1,2,3,4]
